@@ -9,3 +9,4 @@ NOTA: la clase de Graph.cs esta en el mismo archivo de program.cs
 
 La ruta de program.cs es grafos\Program.cs
 la ruta de analysis.py es ./analysis.py
+Profe la neta no le puse .gitignore entonces se vino todo el compilamiento del programa xd, si tiene error pss nomas lo recompila y ya

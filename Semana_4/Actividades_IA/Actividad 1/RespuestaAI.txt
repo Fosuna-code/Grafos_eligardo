@@ -1,0 +1,95 @@
+Claro, aquí tienes un conjunto de casos de prueba para el algoritmo de Havel-Hakimi, diseñados para validar su correcta implementación.
+
+## Secuencias Gráficas (VÁLIDAS)
+Secuencia (n=4): [2, 2, 1, 1]
+
+Resultado: ✓ Gráfica
+
+Razón: Cumple con todas las condiciones del algoritmo.
+
+Ejemplo: Un grafo de ruta con 4 vértices (P₄).
+
+Secuencia (n=6): [5, 1, 1, 1, 1, 1]
+
+Resultado: ✓ Gráfica
+
+Razón: La secuencia se reduce correctamente a ceros.
+
+Ejemplo: Un grafo estrella (K₁,₅), con un nodo central conectado a otros 5.
+
+Secuencia (n=8): [4, 4, 4, 4, 4, 4, 4, 4]
+
+Resultado: ✓ Gráfica
+
+Razón: Es una secuencia k-regular que es consistentemente reducible.
+
+Ejemplo: Un grafo bipartito completo (K₄,₄).
+
+Secuencia (n=10): [7, 6, 5, 4, 4, 3, 2, 1, 1, 1]
+
+Resultado: ✓ Gráfica
+
+Razón: Aunque compleja, la secuencia se reduce exitosamente en cada paso del algoritmo.
+
+Secuencia (n=15): [10, 9, 8, 7, 6, 5, 5, 4, 3, 2, 2, 2, 1, 1, 1]
+
+Resultado: ✓ Gráfica
+
+Razón: Cumple la condición de suma par y el grado máximo es menor que n. Satisface el algoritmo en todas sus iteraciones.
+
+## Secuencias No Gráficas (INVÁLIDAS)
+Secuencia: [4, 3, 2, 2, 1]
+
+Resultado: ✖ No Gráfica
+
+Razón (Suma impar): La suma de los grados es 12. No, la suma es 12 (par). Let's change it. [4, 3, 2, 1, 1]. Suma = 11.
+
+Secuencia Corregida: [4, 3, 2, 1, 1]
+
+Razón (Suma impar): La suma de los grados es 11, un número impar. Esto viola el lema del apretón de manos (handshaking lemma), que establece que la suma de los grados debe ser 2 * |Aristas|.
+
+Secuencia: [6, 5, 4, 3, 2, 1]
+
+Resultado: ✖ No Gráfica
+
+Razón (Grado máx ≥ n): Hay 6 vértices (n=6), pero el grado máximo es 6. Un vértice no puede tener más de n-1 (en este caso, 5) aristas en un grafo simple.
+
+Secuencia: [5, 4, 3, 1, 1, 0]
+
+Resultado: ✖ No Gráfica
+
+Razón (Grados negativos): Durante la ejecución, el algoritmo intenta reducir un grado por debajo de cero.
+
+[5, 4, 3, 1, 1, 0] → pop(5)
+
+Reduce los 5 siguientes: [3, 2, 0, 0, -1]. La aparición de un grado negativo invalida la secuencia.
+
+Secuencia: [4, 4, 1, 1]
+
+Resultado: ✖ No Gráfica
+
+Razón (Estructura imposible): Esta estructura es lógicamente imposible. Requeriría dos vértices conectados a casi todo, mientras que los otros dos están muy poco conectados. El algoritmo falla al no poder resolverlo.
+
+[4, 4, 1, 1] → No es posible con n=4. d_max no puede ser 4.
+
+Secuencia Corregida: [3, 3, 3, 1]. Suma=10.
+
+[3, 3, 3, 1] → pop(3) → [2, 2, 0] → pop(2) → [1, -1]. También falla por grado negativo.
+
+Mejor ejemplo: [5, 5, 4, 3, 2, 1]. Suma=20.
+
+pop(5) → [4, 3, 2, 1, 0] → pop(4) → [2, 1, 0, -1]. Falla por grado negativo, pero es una falla en una iteración más profunda.
+
+Secuencia: [6, 1, 1, 1, 1, 1, 1]
+
+Resultado: ✖ No Gráfica
+
+Razón (Falla en iteración intermedia): Aunque la suma (12) es par y d_max < n, la estructura es imposible.
+
+[6, 1, 1, 1, 1, 1, 1] → pop(6)
+
+Reduce los 6 siguientes: [0, 0, 0, 0, 0, 0]. La secuencia restante es válida, por lo que la original también lo es (Grafo Estrella K₁,₆).
+
+Mejor ejemplo: [5, 5, 5, 1, 1, 1] (n=6, suma=18).
+
+pop(5) → [4, 4, 0, 0, 0]. La nueva secuencia de grados tiene d₁=4 pero solo hay 4 elementos restantes. No hay suficientes nodos para conectar. Es una falla estructural.

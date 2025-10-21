@@ -1,0 +1,2 @@
+En mi caso esta no aplica, no tuve bugs al desarrollar el codigo ya que el codigo ya lo
+tenia hecho para una actividad anterior de esta semana, lo que facilito su implemnetacion

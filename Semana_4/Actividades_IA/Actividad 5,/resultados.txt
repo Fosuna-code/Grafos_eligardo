@@ -1,0 +1,198 @@
+🌍 === Análisis de Mapas de Tráfico - Proyecto Semana 3 ===
+
+==================================================
+🔍 Análisis del Grafo No Dirigido
+==================================================
+📊 Estadísticas generales:
+   • Vértices: 25
+   • Aristas: 160
+   • Densidad: 0.267
+
+🔍 Detalles por vértice:
+   Barrio_Italia: Out-degree=8, In-degree=8
+      └─ Vecinos: [Polanco(7.0km), Bellavista(1.0km), Polanco(7.0km), Bellavista(1.0km), Suba(8.0km), Montserrat(5.0km), Suba(8.0km), Montserrat(5.0km)]
+   Belgrano: Out-degree=6, In-degree=6
+      └─ Vecinos: [Providencia(10.0km), Providencia(10.0km), Engativá(6.0km), Zócalo(8.0km), Engativá(6.0km), Zócalo(8.0km)]
+   Bellavista: Out-degree=8, In-degree=8
+      └─ Vecinos: [Roma(9.0km), Roma(9.0km), Barrio_Italia(1.0km), Lastarria(4.0km), Recoleta(6.0km), Barrio_Italia(1.0km), Lastarria(4.0km), Recoleta(6.0km)]
+   Candelaria: Out-degree=4, In-degree=4
+      └─ Vecinos: [Usaquén(5.0km), Teusaquillo(3.0km), Usaquén(5.0km), Teusaquillo(3.0km)]
+   Chapinero: Out-degree=8, In-degree=8
+      └─ Vecinos: [Roma(5.0km), Usaquén(2.0km), Roma(5.0km), Usaquén(2.0km), Teusaquillo(1.0km), San_Telmo(10.0km), San_Telmo(10.0km), Teusaquillo(1.0km)]
+   Condesa: Out-degree=12, In-degree=12
+      └─ Vecinos: [Roma(3.0km), Polanco(4.0km), Coyoacán(7.0km), Providencia(5.0km), Las_Condes(2.0km), Usaquén(8.0km), Roma(3.0km), Polanco(4.0km), Coyoacán(7.0km), Providencia(5.0km), Las_Condes(2.0km), Usaquén(8.0km)]
+   Coyoacán: Out-degree=8, In-degree=8
+      └─ Vecinos: [Condesa(7.0km), Polanco(6.0km), Condesa(7.0km), Polanco(6.0km), Santa_Fe(4.0km), Xochimilco(8.0km), Santa_Fe(4.0km), Xochimilco(8.0km)]
+   Engativá: Out-degree=6, In-degree=6
+      └─ Vecinos: [Las_Condes(7.0km), Belgrano(6.0km), Las_Condes(7.0km), Belgrano(6.0km), Teusaquillo(4.0km), Teusaquillo(4.0km)]
+   La_Boca: Out-degree=4, In-degree=4
+      └─ Vecinos: [Santa_Fe(10.0km), San_Telmo(1.0km), Santa_Fe(10.0km), San_Telmo(1.0km)]
+   Las_Condes: Out-degree=8, In-degree=8
+      └─ Vecinos: [Condesa(2.0km), Polanco(3.0km), Condesa(2.0km), Polanco(3.0km), Engativá(7.0km), Ñuñoa(4.0km), Engativá(7.0km), Ñuñoa(4.0km)]
+   Lastarria: Out-degree=4, In-degree=4
+      └─ Vecinos: [Providencia(3.0km), Bellavista(4.0km), Providencia(3.0km), Bellavista(4.0km)]
+   Montserrat: Out-degree=2, In-degree=2
+      └─ Vecinos: [Barrio_Italia(5.0km), Barrio_Italia(5.0km)]
+   Palermo: Out-degree=6, In-degree=6
+      └─ Vecinos: [Usaquén(9.0km), Usaquén(9.0km), San_Telmo(4.0km), Recoleta(2.0km), San_Telmo(4.0km), Recoleta(2.0km)]
+   Polanco: Out-degree=10, In-degree=10
+      └─ Vecinos: [Condesa(4.0km), Roma(2.0km), Condesa(4.0km), Roma(2.0km), Las_Condes(3.0km), Barrio_Italia(7.0km), Coyoacán(6.0km), Coyoacán(6.0km), Las_Condes(3.0km), Barrio_Italia(7.0km)]
+   Providencia: Out-degree=8, In-degree=8
+      └─ Vecinos: [Condesa(5.0km), Roma(6.0km), Condesa(5.0km), Roma(6.0km), Belgrano(10.0km), Lastarria(3.0km), Belgrano(10.0km), Lastarria(3.0km)]
+   Recoleta: Out-degree=4, In-degree=4
+      └─ Vecinos: [Bellavista(6.0km), Palermo(2.0km), Bellavista(6.0km), Palermo(2.0km)]
+   Roma: Out-degree=10, In-degree=10
+      └─ Vecinos: [Condesa(3.0km), Condesa(3.0km), Polanco(2.0km), Providencia(6.0km), Chapinero(5.0km), Bellavista(9.0km), Polanco(2.0km), Providencia(6.0km), Chapinero(5.0km), Bellavista(9.0km)]
+   San_Telmo: Out-degree=6, In-degree=6
+      └─ Vecinos: [Chapinero(10.0km), Palermo(4.0km), Chapinero(10.0km), Palermo(4.0km), La_Boca(1.0km), La_Boca(1.0km)]
+   Santa_Fe: Out-degree=6, In-degree=6
+      └─ Vecinos: [Coyoacán(4.0km), Coyoacán(4.0km), Xochimilco(3.0km), La_Boca(10.0km), Xochimilco(3.0km), La_Boca(10.0km)]
+   Suba: Out-degree=4, In-degree=4
+      └─ Vecinos: [Barrio_Italia(8.0km), Ñuñoa(7.0km), Barrio_Italia(8.0km), Ñuñoa(7.0km)]
+   Teusaquillo: Out-degree=6, In-degree=6
+      └─ Vecinos: [Chapinero(1.0km), Engativá(4.0km), Chapinero(1.0km), Engativá(4.0km), Candelaria(3.0km), Candelaria(3.0km)]
+   Usaquén: Out-degree=8, In-degree=8
+      └─ Vecinos: [Condesa(8.0km), Condesa(8.0km), Chapinero(2.0km), Candelaria(5.0km), Palermo(9.0km), Chapinero(2.0km), Palermo(9.0km), Candelaria(5.0km)]
+   Xochimilco: Out-degree=6, In-degree=6
+      └─ Vecinos: [Coyoacán(8.0km), Santa_Fe(3.0km), Coyoacán(8.0km), Santa_Fe(3.0km), Zócalo(9.0km), Zócalo(9.0km)]
+   Zócalo: Out-degree=4, In-degree=4
+      └─ Vecinos: [Belgrano(8.0km), Xochimilco(9.0km), Belgrano(8.0km), Xochimilco(9.0km)]
+   Ñuñoa: Out-degree=4, In-degree=4
+      └─ Vecinos: [Las_Condes(4.0km), Las_Condes(4.0km), Suba(7.0km), Suba(7.0km)]
+
+==================================================
+🔍 Análisis del Grafo Dirigido
+==================================================
+📊 Estadísticas generales:
+   • Vértices: 25
+   • Aristas: 80
+   • Densidad: 0.133
+
+🔍 Detalles por vértice:
+   Barrio_Italia: Out-degree=4, In-degree=4
+      └─ Vecinos: [Polanco(7.0km), Bellavista(1.0km), Suba(8.0km), Montserrat(5.0km)]
+   Belgrano: Out-degree=3, In-degree=3
+      └─ Vecinos: [Providencia(10.0km), Engativá(6.0km), Zócalo(8.0km)]
+   Bellavista: Out-degree=4, In-degree=4
+      └─ Vecinos: [Roma(9.0km), Barrio_Italia(1.0km), Lastarria(4.0km), Recoleta(6.0km)]
+   Candelaria: Out-degree=2, In-degree=2
+      └─ Vecinos: [Usaquén(5.0km), Teusaquillo(3.0km)]
+   Chapinero: Out-degree=4, In-degree=4
+      └─ Vecinos: [Roma(5.0km), Usaquén(2.0km), Teusaquillo(1.0km), San_Telmo(10.0km)]
+   Condesa: Out-degree=6, In-degree=6
+      └─ Vecinos: [Roma(3.0km), Polanco(4.0km), Coyoacán(7.0km), Providencia(5.0km), Las_Condes(2.0km), Usaquén(8.0km)]
+   Coyoacán: Out-degree=4, In-degree=4
+      └─ Vecinos: [Condesa(7.0km), Polanco(6.0km), Santa_Fe(4.0km), Xochimilco(8.0km)]
+   Engativá: Out-degree=3, In-degree=3
+      └─ Vecinos: [Las_Condes(7.0km), Belgrano(6.0km), Teusaquillo(4.0km)]
+   La_Boca: Out-degree=2, In-degree=2
+      └─ Vecinos: [Santa_Fe(10.0km), San_Telmo(1.0km)]
+   Las_Condes: Out-degree=4, In-degree=4
+      └─ Vecinos: [Condesa(2.0km), Polanco(3.0km), Engativá(7.0km), Ñuñoa(4.0km)]
+   Lastarria: Out-degree=2, In-degree=2
+      └─ Vecinos: [Providencia(3.0km), Bellavista(4.0km)]
+   Montserrat: Out-degree=1, In-degree=1
+      └─ Vecinos: [Barrio_Italia(5.0km)]
+   Palermo: Out-degree=3, In-degree=3
+      └─ Vecinos: [Usaquén(9.0km), San_Telmo(4.0km), Recoleta(2.0km)]
+   Polanco: Out-degree=5, In-degree=5
+      └─ Vecinos: [Condesa(4.0km), Roma(2.0km), Las_Condes(3.0km), Barrio_Italia(7.0km), Coyoacán(6.0km)]
+   Providencia: Out-degree=4, In-degree=4
+      └─ Vecinos: [Condesa(5.0km), Roma(6.0km), Belgrano(10.0km), Lastarria(3.0km)]
+   Recoleta: Out-degree=2, In-degree=2
+      └─ Vecinos: [Bellavista(6.0km), Palermo(2.0km)]
+   Roma: Out-degree=5, In-degree=5
+      └─ Vecinos: [Condesa(3.0km), Polanco(2.0km), Providencia(6.0km), Chapinero(5.0km), Bellavista(9.0km)]
+   San_Telmo: Out-degree=3, In-degree=3
+      └─ Vecinos: [Chapinero(10.0km), Palermo(4.0km), La_Boca(1.0km)]
+   Santa_Fe: Out-degree=3, In-degree=3
+      └─ Vecinos: [Coyoacán(4.0km), Xochimilco(3.0km), La_Boca(10.0km)]
+   Suba: Out-degree=2, In-degree=2
+      └─ Vecinos: [Barrio_Italia(8.0km), Ñuñoa(7.0km)]
+   Teusaquillo: Out-degree=3, In-degree=3
+      └─ Vecinos: [Chapinero(1.0km), Engativá(4.0km), Candelaria(3.0km)]
+   Usaquén: Out-degree=4, In-degree=4
+      └─ Vecinos: [Condesa(8.0km), Chapinero(2.0km), Candelaria(5.0km), Palermo(9.0km)]
+   Xochimilco: Out-degree=3, In-degree=3
+      └─ Vecinos: [Coyoacán(8.0km), Santa_Fe(3.0km), Zócalo(9.0km)]
+   Zócalo: Out-degree=2, In-degree=2
+      └─ Vecinos: [Belgrano(8.0km), Xochimilco(9.0km)]
+   Ñuñoa: Out-degree=2, In-degree=2
+      └─ Vecinos: [Las_Condes(4.0km), Suba(7.0km)]
+
+==================================================
+🔗 Pruebas de Conectividad
+==================================================
+¿A→G dirigido? False (esperado: True)
+¿G→A dirigido? False (esperado: False)
+Vértice más conectado: Condesa
+
+🎉 ¡Análisis completado exitosamente!
+=== Pruebas de Havel-Hakimi ===
+
+Caso 1: [4, 3, 3, 2, 2, 2, 1, 1]
+Resultado: ✓ Gráfica
+
+Caso 2: [3, 2, 2, 1]
+Resultado: ✓ Gráfica
+
+Caso 3: [4, 3, 3, 2, 2, 2]
+Resultado: ✓ Gráfica
+
+Caso 4: [0, 0, 0, 0]
+Resultado: ✓ Gráfica
+
+Caso 5: [3, 3, 3, 3]
+Resultado: ✓ Gráfica
+
+Caso 1: [3, 3, 3, 1]
+Resultado: ✖ No Gráfica
+
+Caso 2: [5, 5, 4, 3, 2, 1]
+Resultado: ✖ No Gráfica
+
+Caso 3: [3, 2, 1]
+Resultado: ✖ No Gráfica
+
+Caso 4: [6, 1, 1, 1, 1, 1, 1]
+Resultado: ✓ Gráfica
+
+Caso 4: [5, 3, 2, 2, 1]
+Resultado: ✖ No Gráfica
+
+Secuencia del mapa urbano: [12, 10, 10, 8, 8, 8, 8, 8, 8, 8, 6, 6, 6, 6, 6, 6, 6, 4, 4, 4, 4, 4, 4, 4, 2]
+¿Es gráfica? True
+¿Consistente? True
+
+=== Matriz de Adyacencia ===
+	 a 	 b 	 c 	 d 	 e 	 f 	 g 	 h 	 i 	 j 	 k 	 l 	 m 	 n 	 o 	 p 	 q 	 r 	 s 	 t 	 u 	 v 	 w 	 x 	 y 
+a 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 
+b 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 
+c 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+d 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 0 
+e 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 1 	 1 	 0 	 0 	 0 
+f 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 1 	 0 	 0 	 0 	 1 	 1 	 0 	 1 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 
+g 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 1 	 0 	 0 
+h 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 
+i 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 0 	 0 	 0 	 0 
+j 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 
+k 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+l 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+m 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 1 	 0 	 0 	 0 	 1 	 0 	 0 	 0 
+n 	 1 	 0 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+o 	 0 	 1 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+p 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+q 	 0 	 0 	 1 	 0 	 1 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+r 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+s 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 
+t 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 
+u 	 0 	 0 	 0 	 1 	 1 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+v 	 0 	 0 	 0 	 1 	 1 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 
+w 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 1 	 0 
+x 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 
+y 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 0 	 1 	 0 	 0 	 0 	 0 	 0 
+
+==================================================
+Verificación de Consistencia: Lista vs. Matriz
+==================================================
+¡Éxito! La lista de adyacencia y la matriz son consistentes.

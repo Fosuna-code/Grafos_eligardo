@@ -1,0 +1,7 @@
+La verdad es que "debuggear" es una de las maneras más brutales, pero más efectivas, de aprender. Al principio, claro que te frustras. Es el golpe de realidad entre lo que creías que le dijiste a la máquina y lo que en verdad entendió. Cada error te frena en seco y te obliga a cuestionar todo lo que dabas por sentado.
+
+Pero justo en esa cacería del error es donde todo hace ‘clic’. Te conviertes en una especie de detective dentro de tu propio código, siguiéndole la pista a cada variable y cada función. Cuando finalmente encuentras al culpable, la solución no es solo un parche; es una lección. El conocimiento que ganas arreglando algo que tú mismo rompiste se te queda grabado mucho más que si solo hubieras leído la teoría.
+
+Al final, no solo aprendes a programar mejor, aprendes a pensar. Te enseña a no rendirte y a buscar soluciones de forma creativa, y eso, honestamente, te sirve para todo.
+
+Creditos correspondientes a la IA de Gemini, que me ayudo a mejorar mi redaccion de esta reflexion.

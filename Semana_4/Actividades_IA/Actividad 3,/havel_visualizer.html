@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Visualizador del Algoritmo Havel-Hakimi</title>
+        <style>
+            /* --- Estilos Generales --- */
+            :root {
+                --color-bg: #f0f4f8;
+                --color-text: #333;
+                --color-primary: #3498db;
+                --color-secondary: #f39c12;
+                --color-success: #2ecc71;
+                --color-error: #e74c3c;
+                --color-box-bg: #ffffff;
+                --color-box-border: #bdc3c7;
+                --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                --box-size: 50px;
+                --gap: 10px;
+                --transition-speed: 0.4s;
+            }
+
+            body {
+                font-family: var(--font-family);
+                background-color: var(--color-bg);
+                color: var(--color-text);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                padding: 20px;
+                box-sizing: border-box;
+            }
+
+            .container {
+                width: 100%;
+                max-width: 800px;
+                background-color: var(--color-box-bg);
+                padding: 25px;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            h1 {
+                margin-top: 0;
+                margin-bottom: 20px;
+                color: var(--color-primary);
+            }
+
+            /* --- Controles --- */
+            .controls {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: var(--gap);
+                margin-bottom: 25px;
+                flex-wrap: wrap;
+            }
+
+            #sequence-input {
+                padding: 10px 15px;
+                border: 1px solid var(--color-box-border);
+                border-radius: 8px;
+                font-size: 16px;
+                min-width: 200px;
+                transition: border-color var(--transition-speed),
+                    box-shadow var(--transition-speed);
+            }
+
+            #sequence-input:focus {
+                outline: none;
+                border-color: var(--color-primary);
+                box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+                font-family: var(--font-family);
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                color: white;
+                transition: background-color var(--transition-speed),
+                    transform 0.1s;
+            }
+
+            button:active {
+                transform: scale(0.98);
+            }
+
+            button:disabled {
+                background-color: #bdc3c7;
+                cursor: not-allowed;
+            }
+
+            #validate-btn {
+                background-color: var(--color-success);
+            }
+            #next-step-btn {
+                background-color: var(--color-primary);
+            }
+            #reset-btn {
+                background-color: var(--color-error);
+            }
+
+            /* --- Visualización --- */
+            #visualization-area {
+                position: relative;
+                height: var(--box-size);
+                min-height: 70px; /* Espacio para cajas y mensajes */
+                display: flex;
+                /* El codigo anterior fue removido para mejor visualizacion */
+                /* justify-content: center; */
+                align-items: center;
+                margin-bottom: 20px;
+                transition: height var(--transition-speed);
+            }
+
+            .degree-box {
+                width: var(--box-size);
+                height: var(--box-size);
+                background-color: var(--color-box-bg);
+                border: 2px solid var(--color-box-border);
+                border-radius: 8px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+                font-weight: bold;
+                position: absolute; /* Para animar la posición */
+                transition: transform var(--transition-speed) ease-in-out,
+                    background-color var(--transition-speed),
+                    border-color var(--transition-speed),
+                    opacity var(--transition-speed);
+            }
+
+            .degree-box .number {
+                transition: color var(--transition-speed), transform 0.2s;
+            }
+
+            /* --- Estados de las Cajas --- */
+            .degree-box.removing {
+                background-color: var(--color-primary);
+                border-color: var(--color-primary);
+                color: white;
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            .degree-box.decrementing {
+                background-color: var(--color-secondary);
+                border-color: var(--color-secondary);
+                color: white;
+            }
+
+            .degree-box.decrementing .number {
+                transform: translateY(-5px) scale(1.2);
+                color: white;
+            }
+
+            /* --- Mensaje Final --- */
+            #message-area {
+                font-size: 22px;
+                font-weight: bold;
+                height: 30px;
+            }
+
+            #message-area.success {
+                color: var(--color-success);
+            }
+            #message-area.error {
+                color: var(--color-error);
+            }
+
+            /* --- Responsividad --- */
+            @media (max-width: 768px) {
+                .controls {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+                #sequence-input {
+                    width: calc(100% - 30px); /* Ajuste por padding */
+                    min-width: auto;
+                }
+                h1 {
+                    font-size: 24px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- Modificaciones menores de diseno -->
+            <h2>Fernando osuna Manzo</h2>
+            <h2>Sistemas computacionales</h2>
+            <h1>Visualizador Havel-Hakimi</h1>
+            <div class="controls">
+                <input
+                    type="text"
+                    id="sequence-input"
+                    placeholder="Ej: 4, 3, 3, 2, 2, 1"
+                    value="4,3,3,2,2,1"
+                />
+                <button id="validate-btn">Validar</button>
+                <button id="next-step-btn" disabled>Paso Siguiente</button>
+                <button id="reset-btn">Reiniciar</button>
+            </div>
+            <div id="visualization-area"></div>
+            <div id="message-area"></div>
+        </div>
+
+        <script>
+            // --- Referencias a elementos del DOM ---
+            const sequenceInput = document.getElementById('sequence-input');
+            const validateBtn = document.getElementById('validate-btn');
+            const nextStepBtn = document.getElementById('next-step-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const visualizationArea =
+                document.getElementById('visualization-area');
+            const messageArea = document.getElementById('message-area');
+
+            // --- Estado del algoritmo ---
+            let originalSequence = [];
+            let steps = [];
+            let currentStepIndex = -1;
+
+            // --- Constantes de configuración ---
+            const BOX_SIZE = 50;
+            const GAP = 10;
+            const ANIMATION_DURATION = 400; // ms, debe coincidir con --transition-speed
+
+            // --- Lógica Principal ---
+
+            /**
+             * Inicializa los listeners de los botones.
+             */
+            function initialize() {
+                validateBtn.addEventListener('click', handleValidate);
+                nextStepBtn.addEventListener('click', handleNextStep);
+                resetBtn.addEventListener('click', handleReset);
+                sequenceInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') handleValidate();
+                });
+            }
+
+            /**
+             * Maneja el evento de click en el botón "Validar".
+             * Parsea la entrada, pre-calcula los pasos y muestra el estado inicial.
+             */
+            function handleValidate() {
+                reset();
+                const inputText = sequenceInput.value.trim();
+                if (!inputText) return;
+
+                // Convierte el string a un array de números, filtrando valores no válidos
+                const parsedSequence = inputText
+                    .split(/[, ]+/)
+                    .map((n) => parseInt(n, 10))
+                    .filter((n) => !isNaN(n));
+
+                if (parsedSequence.length === 0) {
+                    displayMessage('✖ Secuencia inválida.', 'error');
+                    return;
+                }
+
+                originalSequence = [...parsedSequence];
+                steps = calculateAllSteps(originalSequence);
+                currentStepIndex = 0;
+
+                renderStep(steps[currentStepIndex]);
+
+                updateButtonState(true);
+            }
+
+            /**
+             * Maneja el evento de click en "Paso Siguiente".
+             * Avanza al siguiente estado pre-calculado y lo renderiza.
+             */
+            function handleNextStep() {
+                currentStepIndex++;
+                if (currentStepIndex < steps.length) {
+                    renderStep(steps[currentStepIndex]);
+                }
+            }
+
+            /**
+             * Maneja el evento de click en "Reiniciar".
+             * Restaura la aplicación a su estado inicial.
+             */
+            function handleReset() {
+                reset();
+                sequenceInput.value = '4,3,3,2,2,1'; // Valor de ejemplo
+            }
+
+            /**
+             * Limpia el estado y la UI.
+             */
+            function reset() {
+                originalSequence = [];
+                steps = [];
+                currentStepIndex = -1;
+                visualizationArea.innerHTML = '';
+                messageArea.innerHTML = '';
+                messageArea.className = '';
+                updateButtonState(false);
+            }
+
+            /**
+             * Actualiza el estado de habilitado/deshabilitado de los botones.
+             * @param {boolean} isRunning - Si el algoritmo está en ejecución.
+             */
+            function updateButtonState(isRunning) {
+                validateBtn.disabled = isRunning;
+                sequenceInput.disabled = isRunning;
+                nextStepBtn.disabled =
+                    !isRunning || currentStepIndex >= steps.length - 1;
+                resetBtn.disabled = !isRunning;
+            }
+
+            /**
+             * Muestra un mensaje final en el área de mensajes.
+             * @param {string} text - El mensaje a mostrar.
+             * @param {'success' | 'error'} type - El tipo de mensaje para aplicar la clase CSS.
+             */
+            function displayMessage(text, type) {
+                messageArea.textContent = text;
+                messageArea.className = type;
+            }
+
+            // --- Lógica del Algoritmo Havel-Hakimi ---
+
+            /**
+             * Ejecuta el algoritmo completo y almacena cada paso.
+             * @param {number[]} initialSequence - La secuencia de grados inicial.
+             * @returns {object[]} Un array con el estado en cada paso.
+             */
+            function calculateAllSteps(initialSequence) {
+                // Ahora trabajamos con objetos para mantener la identidad de cada número/caja.
+                let sequence = initialSequence.map((val, i) => ({
+                    value: val,
+                    uid: i,
+                }));
+                const calculatedSteps = [];
+
+                // Paso inicial
+                calculatedSteps.push({
+                    type: 'initial',
+                    sequence: JSON.parse(JSON.stringify(sequence)), // Deep copy
+                    message: 'Secuencia inicial.',
+                });
+
+                while (true) {
+                    const preSortSequence = JSON.parse(
+                        JSON.stringify(sequence)
+                    );
+                    sequence.sort((a, b) => b.value - a.value);
+
+                    // Solo agregar paso de ordenamiento si el orden realmente cambió.
+                    if (
+                        JSON.stringify(preSortSequence.map((s) => s.uid)) !==
+                        JSON.stringify(sequence.map((s) => s.uid))
+                    ) {
+                        calculatedSteps.push({
+                            type: 'sort',
+                            sequence: JSON.parse(JSON.stringify(sequence)),
+                            message: 'Ordenar en orden descendente.',
+                        });
+                    }
+
+                    if (sequence.every((d) => d.value === 0)) {
+                        calculatedSteps.push({
+                            type: 'end',
+                            isGraphical: true,
+                            sequence: [],
+                        });
+                        return calculatedSteps;
+                    }
+
+                    const d1_obj = sequence.shift();
+                    const d1 = d1_obj.value;
+
+                    if (d1 > sequence.length) {
+                        sequence.unshift(d1_obj); // Reinsertar para mostrar el estado de error
+                        calculatedSteps.push({
+                            type: 'end',
+                            isGraphical: false,
+                            sequence: JSON.parse(JSON.stringify(sequence)),
+                        });
+                        return calculatedSteps;
+                    }
+
+                    calculatedSteps.push({
+                        type: 'remove',
+                        removedUID: d1_obj.uid,
+                        sequence: JSON.parse(JSON.stringify(sequence)),
+                        message: `Eliminar el grado más alto (${d1}).`,
+                    });
+
+                    const decrementedUIDs = [];
+                    for (let i = 0; i < d1; i++) {
+                        sequence[i].value--;
+                        decrementedUIDs.push(sequence[i].uid);
+                    }
+
+                    calculatedSteps.push({
+                        type: 'decrement',
+                        decrementedUIDs: decrementedUIDs,
+                        sequence: JSON.parse(JSON.stringify(sequence)),
+                        message: `Decrementar los siguientes ${d1} grados.`,
+                    });
+
+                    if (sequence.some((d) => d.value < 0)) {
+                        calculatedSteps.push({
+                            type: 'end',
+                            isGraphical: false,
+                            sequence: JSON.parse(JSON.stringify(sequence)),
+                        });
+                        return calculatedSteps;
+                    }
+                }
+            }
+
+            // --- Lógica de Renderizado y Animación ---
+
+            /**
+             * Dibuja un paso específico del algoritmo en la pantalla.
+             * @param {object} step - El objeto de paso a renderizar.
+             */
+            async function renderStep(step) {
+                nextStepBtn.disabled = true;
+
+                switch (step.type) {
+                    case 'initial':
+                        await animateInitial(step.sequence);
+                        break;
+                    case 'sort':
+                        await animateSort(step.sequence);
+                        break;
+                    case 'remove':
+                        await animateRemove(step.removedUID, step.sequence);
+                        break;
+                    case 'decrement':
+                        await animateDecrement(
+                            step.decrementedUIDs,
+                            step.sequence
+                        );
+                        break;
+                    case 'end':
+                        if (step.isGraphical) {
+                            displayMessage('✓ Es Gráfica', 'success');
+                        } else {
+                            displayMessage('✖ No es Gráfica', 'error');
+                        }
+                        break;
+                }
+                updateButtonState(true);
+            }
+
+            /**
+             * Calcula la posición X central para una secuencia de cajas.
+             * @param {number} count - Número de cajas.
+             * @returns {number} La posición X de inicio.
+             */
+            function getStartX(count) {
+                const totalWidth = count * BOX_SIZE + (count - 1) * GAP;
+                return (visualizationArea.offsetWidth - totalWidth) / 2;
+            }
+
+            /**
+             * Renderizado inicial de las cajas.
+             */
+            async function animateInitial(sequence) {
+                visualizationArea.innerHTML = '';
+                const startX = getStartX(sequence.length);
+                sequence.forEach((item, i) => {
+                    const box = createBox(item.value, item.uid);
+                    box.style.transform = `translateX(${
+                        startX + i * (BOX_SIZE + GAP)
+                    }px)`;
+                    visualizationArea.appendChild(box);
+                });
+            }
+
+            /**
+             * Anima el reordenamiento de las cajas.
+             */
+            async function animateSort(sortedSequence) {
+                const startX = getStartX(sortedSequence.length);
+                sortedSequence.forEach((item, newIndex) => {
+                    const boxToMove = visualizationArea.querySelector(
+                        `[data-uid='${item.uid}']`
+                    );
+                    if (boxToMove) {
+                        boxToMove.style.transform = `translateX(${
+                            startX + newIndex * (BOX_SIZE + GAP)
+                        }px)`;
+                    }
+                });
+                await new Promise((resolve) =>
+                    setTimeout(resolve, ANIMATION_DURATION)
+                );
+            }
+
+            /**
+             * Anima la eliminación del primer elemento.
+             */
+            async function animateRemove(removedUID, sequence) {
+                const boxToRemove = visualizationArea.querySelector(
+                    `[data-uid='${removedUID}']`
+                );
+                if (!boxToRemove) return;
+
+                boxToRemove.classList.add('removing');
+
+                const startX = getStartX(sequence.length);
+                sequence.forEach((item, i) => {
+                    const box = visualizationArea.querySelector(
+                        `[data-uid='${item.uid}']`
+                    );
+                    if (box) {
+                        box.style.transform = `translateX(${
+                            startX + i * (BOX_SIZE + GAP)
+                        }px)`;
+                    }
+                });
+
+                await new Promise((resolve) =>
+                    setTimeout(resolve, ANIMATION_DURATION)
+                );
+                if (boxToRemove) boxToRemove.remove();
+            }
+
+            /**
+             * Anima la fase de decremento.
+             */
+            async function animateDecrement(decrementedUIDs, newSequence) {
+                decrementedUIDs.forEach((uid) => {
+                    const box = visualizationArea.querySelector(
+                        `[data-uid='${uid}']`
+                    );
+                    if (box) box.classList.add('decrementing');
+                });
+                await new Promise((resolve) =>
+                    setTimeout(resolve, ANIMATION_DURATION * 1.5)
+                );
+
+                newSequence.forEach((item) => {
+                    const box = visualizationArea.querySelector(
+                        `[data-uid='${item.uid}']`
+                    );
+                    if (box) {
+                        box.classList.remove('decrementing');
+                        box.querySelector('.number').textContent = item.value;
+                        box.dataset.value = item.value;
+                    }
+                });
+                await new Promise((resolve) =>
+                    setTimeout(resolve, ANIMATION_DURATION)
+                );
+            }
+
+            /**
+             * Crea un nuevo elemento DOM para una caja de grado.
+             * @param {number} degree - El número a mostrar en la caja.
+             * @param {number} uid - Un ID único para la caja.
+             * @returns {HTMLElement} El elemento de la caja.
+             */
+            function createBox(degree, uid) {
+                const box = document.createElement('div');
+                box.className = 'degree-box';
+                box.dataset.uid = uid; // Usar UID para seguimiento
+                box.dataset.value = degree;
+
+                const numberSpan = document.createElement('span');
+                numberSpan.className = 'number';
+                numberSpan.textContent = degree;
+
+                box.appendChild(numberSpan);
+                return box;
+            }
+
+            // Iniciar la aplicación
+            initialize();
+        </script>
+    </body>
+</html>

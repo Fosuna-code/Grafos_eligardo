@@ -1,5 +1,7 @@
 # Eligardo Alert!
-Documento generado a partir de un draft que me avente en 10 minutos y pasado por gemini para que se viera bonito (pongame 100 profe) 
+
+Documento generado a partir de un draft que me avente en 10 minutos y pasado por gemini para que se viera bonito (pongame 100 profe)
+
 # ¡Bienvenidos a Nuestro Viaje de Algoritmos y Estructuras de Datos! 🚀
 
 ¡Hola! 👋 Nos alegra mucho que estés aquí. Este repositorio es el fruto de 8 semanas de aprendizaje intenso, curiosidad y mucha programación. Aquí encontrarás nuestra colección de prácticas, proyectos y experimentos explorando el fascinante mundo de los algoritmos y las estructuras de datos avanzadas.
@@ -91,5 +93,3 @@ Este proyecto ha sido una experiencia increíble de crecimiento técnico. Hemos 
 ¡Gracias por visitar nuestro repositorio! Siéntete libre de explorar el código, clonarlo y jugar con él. ¡El conocimiento es para compartir! 🌟
 
 ---
-
-_Hecho con 💻 y mucho ☕ por el equipo._

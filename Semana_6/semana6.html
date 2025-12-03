@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Semana 6 – Algoritmos de Optimización en Grafos Ponderados</title>
+    <style>
+        /* Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Tipografía */
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 8px;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Navegación */
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        nav li {
+            margin: 5px 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* Secciones especiales */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .objectives {
+            background: #e8f4fd;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .concepts {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .visualization {
+            background: #e8f8f5;
+            padding: 20px;
+            border-left: 5px solid #1abc9c;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .comparison {
+            background: #fef5e7;
+            padding: 20px;
+            border-left: 5px solid #f39c12;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .application {
+            background: #ebf5fb;
+            padding: 20px;
+            border-left: 5px solid #5dade2;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .complexity {
+            background: #ffe6e6;
+            padding: 20px;
+            border-left: 5px solid #e74c3c;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .checklist {
+            background: #d4edda;
+            padding: 20px;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background: #f8d7da;
+            padding: 20px;
+            border-left: 5px solid #dc3545;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .project {
+            background: #d1ecf1;
+            padding: 20px;
+            border-left: 5px solid #17a2b8;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .ia-activity {
+            background: #e7d4f7;
+            padding: 20px;
+            border-left: 5px solid #9b59b6;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Listas */
+        ul, ol {
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Código */
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: #e74c3c;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* Enlaces */
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 3px solid #3498db;
+            text-align: center;
+            color: #7f8c8d;
+        }
+
+        /* Elementos especiales */
+        .prompt-number {
+            background: #9b59b6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .ia-prompt {
+            background: #f8f9fa;
+            padding: 15px;
+            border: 2px dashed #9b59b6;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+        }
+
+        strong {
+            color: #2c3e50;
+        }
+
+        em {
+            color: #555;
+        }
+
+        /* Checkpoint */
+        .checkpoint {
+            background: #fffbea;
+            padding: 25px;
+            border: 3px dashed #f39c12;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Semana 6 – Algoritmos de Optimización en Grafos Ponderados</h1>
+        
+        <p><em>Estructuras de Datos Avanzadas © 2025 | Versión Mejorada con Actividades IA</em></p>
+        
+        <nav>
+            <ul>
+                <li><a href="#intro">Introducción</a></li>
+                <li><a href="#problem">Problema</a></li>
+                <li><a href="#dijkstra">Dijkstra</a></li>
+                <li><a href="#floyd">Floyd-Warshall</a></li>
+                <li><a href="#comparison">Comparación</a></li>
+                <li><a href="#solution-py">Código Python</a></li>
+                <li><a href="#applications">Aplicaciones</a></li>
+                <li><a href="#test-cases">Casos de Prueba</a></li>
+                <li><a href="#ia-activities">Actividades IA</a></li>
+                <li><a href="#project">Proyecto</a></li>
+            </ul>
+        </nav>
+
+        <!-- INTRODUCCIÓN -->
+        <section id="intro" class="section">
+            <h2>🎯 Objetivos de la Semana</h2>
+            <div class="objectives">
+                <h3>¿Qué lograrás hoy?</h3>
+                <ul>
+                    <li>Entender el <strong>problema de caminos más cortos</strong> en grafos ponderados y sus aplicaciones en GPS, redes y logística.</li>
+                    <li>Implementar y analizar el <strong>Algoritmo de Dijkstra</strong> para caminos desde un origen único.</li>
+                    <li>Dominar el <strong>Algoritmo de Floyd-Warshall</strong> para caminos entre todos los pares de nodos.</li>
+                    <li>Implementar ambos en <strong>Python</strong> con optimizaciones para grafos densos y dispersos.</li>
+                    <li>Comparar criterios de selección: ¿Dijkstra o Floyd-Warshall? Según densidad y requisitos.</li>
+                    <li>Aplicar a problemas reales: enrutamiento de paquetes IP, planificación de rutas urbanas, optimización de cadenas de suministro.</li>
+                    <li>Desarrollar habilidades en uso de IA para depuración y optimización de algoritmos de grafos.</li>
+                </ul>
+            </div>
+            <div class="concepts">
+                <h3>Enfoque Pedagógico</h3>
+                <p><strong>Flujo de Aprendizaje:</strong> Fundamentos Teóricos → Visualización Paso a Paso → Implementación en Python → Aplicaciones Prácticas → Análisis Comparativo → Potenciación con IA.</p>
+                <p><em>💡 Filosofía: "En un mundo conectado, los caminos más cortos no son solo matemáticas; son el núcleo de la eficiencia global. Domina Dijkstra y Floyd-Warshall para optimizar lo invisible."</em></p>
+                <p><strong>Conexión con Semanas Previas:</strong> Extiende BFS (Semana 5) a grafos ponderados. Usa grafos validados en Semana 4 para pruebas reales.</p>
+            </div>
+            <p><a href="#problem">Continuar → Problema de Caminos</a></p>
+        </section>
+
+        <!-- PROBLEMA DE CAMINOS MÁS CORTOS -->
+        <section id="problem" class="section">
+            <h2>🛣️ 2.3.1. Problema de Caminos Más Cortos: Desde GPS hasta Protocolos de Red</h2>
+            
+            <h3>Concepto Fundamental</h3>
+            <p><span class="emoji">🟡</span> En grafos <em>ponderados</em>, las aristas tienen <strong>pesos</strong> (costos, distancias, tiempos). El <strong>problema de caminos más cortos</strong> busca la ruta de menor costo total entre nodos, no solo el menor número de aristas (como en BFS).</p>
+            
+            <div class="concepts">
+                <h4>Características Clave</h4>
+                <ul>
+                    <li><strong>Tipos de Pesos:</strong> Positivos (distancias), negativos (deudas en finanzas), cero (conexiones gratuitas)</li>
+                    <li><strong>Variantes del Problema:</strong>
+                        <ul>
+                            <li><strong>Un origen único:</strong> Camino desde s a todos (Dijkstra)</li>
+                            <li><strong>Todos los pares:</strong> Matriz de distancias (Floyd-Warshall)</li>
+                            <li><strong>Con restricciones:</strong> Evitar nodos específicos, maximizar flujo</li>
+                        </ul>
+                    </li>
+                    <li><strong>Complejidad Teórica:</strong> O(V²) para Floyd-Warshall; O((V+E) log V) para Dijkstra con heap</li>
+                    <li><strong>Restricciones Comunes:</strong> No pesos negativos (Dijkstra); sí negativos pero sin ciclos negativos (Bellman-Ford, Semana 7)</li>
+                </ul>
+            </div>
+
+            <h3>Algoritmo General Paso a Paso</h3>
+            <ol>
+                <li><strong>Modelado:</strong> Representa el grafo con matriz de adyacencia o lista de adyacencia + pesos</li>
+                <li><strong>Inicialización:</strong> Distancia[origen] = 0; Distancia[otros] = ∞</li>
+                <li><strong>Relajación:</strong> Actualiza distancias iterativamente: Dist[u] + Peso(u,v) < Dist[v] → Dist[v] = Dist[u] + Peso(u,v)</li>
+                <li><strong>Finalización:</strong> Cuando no hay actualizaciones, las distancias son óptimas</li>
+            </ol>
+
+            <div class="visualization">
+                <h4>🎨 Visualización del Problema</h4>
+                <p>Grafo ponderado de ejemplo: Red de ciudades con distancias en km</p>
+                
+                <div class="mermaid" data-alt="Grafo ponderado con nodos A-F y pesos en aristas">
+                graph TD
+                    A((A<br/>0)) ---|10| B((B<br/>∞))
+                    A ---|5| C((C<br/>∞))
+                    B ---|3| D((D<br/>∞))
+                    C ---|2| D
+                    C ---|8| E((E<br/>∞))
+                    D ---|4| E
+                    B ---|15| F((F<br/>∞))
+                    E ---|7| F
+                    
+                    style A fill:#e74c3c,stroke:#c0392b,stroke-width:4px,color:#fff
+                    classDef inf fill:#95a5a6,stroke:#7f8c8d
+                    class B,C,D,E,F inf
+                </div>
+                
+                <p><strong>Objetivo:</strong> Calcular distancias mínimas desde A a todos.</p>
+                <table>
+                    <tr>
+                        <th>Nodo</th>
+                        <th>Distancia Inicial</th>
+                        <th>Camino Óptimo Final</th>
+                        <th>Distancia Final</th>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>0</td>
+                        <td>A</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>∞</td>
+                        <td>A → B</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>∞</td>
+                        <td>A → C</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>∞</td>
+                        <td>A → C → D</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <td>∞</td>
+                        <td>A → C → D → E</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>F</td>
+                        <td>∞</td>
+                        <td>A → C → D → E → F</td>
+                        <td>18</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="concepts" style="background: #ffe6f0; padding: 15px; border-left: 5px solid #e91e63; margin: 20px 0;">
+                <h4>⏸️ PUNTO DE PAUSA: Ejercicio Manual</h4>
+                <p><strong>Antes de continuar (5-10 minutos):</strong></p>
+                <ol>
+                    <li>Dibuja el grafo de la visualización en papel</li>
+                    <li>Calcula manualmente las distancias desde A usando relajación simple (2 rondas)</li>
+                    <li><strong>Pregunta:</strong> ¿Por qué el camino A→B→F (25) no es óptimo para F? ¿Qué principio viola?</li>
+                </ol>
+                <p><em>No avances hasta completarlo.</em></p>
+            </div>
+
+            <div class="application">
+                <h4>🌍 Aplicaciones Reales</h4>
+                
+                <h5>Caso 1: GPS y Navegación (Google Maps, Waze)</h5>
+                <p><strong>Problema:</strong> Ruta más rápida considerando tráfico dinámico.</p>
+                <ul>
+                    <li>Pesos: Distancias + tiempo estimado (actualizado en tiempo real)</li>
+                    <li>Solución: Dijkstra con heap binario para actualizaciones rápidas</li>
+                    <li>Escala: Millones de nodos (intersecciones), miles de consultas/segundo</li>
+                </ul>
+                
+                <h5>Caso 2: Protocolos de Red (OSPF en Internet)</h5>
+                <p><strong>Problema:</strong> Enrutamiento de paquetes IP con menor latencia.</p>
+                <ul>
+                    <li>Pesos: Costo de ancho de banda, latencia, congestión</li>
+                    <li>Solución: Dijkstra en cada router para tabla de enrutamiento</li>
+                    <li>Impacto: 99% del tráfico web usa variantes de estos algoritmos</li>
+                </ul>
+                
+                <h5>Caso 3: Logística y Cadena de Suministro (Amazon, UPS)</h5>
+                <p><strong>Problema:</strong> Optimización de rutas de entrega multi-parada.</p>
+                <ul>
+                    <li>Pesos: Distancia + combustible + tiempo de carga</li>
+                    <li>Solución: Floyd-Warshall para precomputar todas las distancias en flotas grandes</li>
+                    <li>Beneficio: Reducción de 10-20% en costos operativos</li>
+                </ul>
+            </div>
+
+            <p><a href="#dijkstra">Continuar → Dijkstra</a></p>
+        </section>
+
+        <!-- DIJKSTRA -->
+        <section id="dijkstra" class="section">
+            <h2>⚡ 2.3.2. Algoritmo de Dijkstra: Implementación y Análisis de Complejidad</h2>
+            
+            <h3>Concepto Fundamental</h3>
+            <p><span class="emoji">🔴</span> <strong>Dijkstra</strong> encuentra caminos más cortos desde un origen único en grafos con <em>pesos no negativos</em>. Usa una <strong>cola de prioridad</strong> para expandir siempre el nodo con distancia mínima conocida.</p>
+            
+            <div class="concepts">
+                <h4>Características Clave</h4>
+                <ul>
+                    <li><strong>Estructura de Datos:</strong> Cola de prioridad (Heap) + conjunto de visitados</li>
+                    <li><strong>Orden de Exploración:</strong> Nodo con menor distancia tentadora</li>
+                    <li><strong>Garantía:</strong> Óptimo para pesos ≥ 0; no maneja negativos</li>
+                    <li><strong>Complejidad Temporal:</strong> O((V + E) log V) con heap binario</li>
+                    <li><strong>Complejidad Espacial:</strong> O(V) para distancias y heap</li>
+                </ul>
+            </div>
+
+            <h3>Algoritmo Dijkstra Paso a Paso</h3>
+            <ol>
+                <li><strong>Inicialización:</strong> Dist[origen] = 0; otros = ∞; cola_prioridad.insert(origen, 0)</li>
+                <li><strong>Bucle Principal:</strong> Mientras cola no vacía:
+                    <ul>
+                        <li>Extraer nodo u con mínima distancia</li>
+                        <li>Si u ya visitado, saltar</li>
+                        <li>Marcar u visitado</li>
+                        <li>Para cada vecino v de u:
+                            <ul>
+                                <li>Si Dist[u] + peso(u,v) < Dist[v]: actualizar Dist[v] y insertar/actualizar en cola</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Final:</strong> Dist[] contiene distancias mínimas; reconstruir caminos con padres</li>
+            </ol>
+
+            <div class="visualization">
+                <h4>🎨 Visualización Dijkstra</h4>
+                <p>Usando el grafo anterior desde A:</p>
+                
+                <div class="mermaid" data-alt="Ejecución de Dijkstra con distancias actualizadas en nodos">
+                graph TD
+                    A((A<br/>0)) ---|10| B((B<br/>10))
+                    A ---|5| C((C<br/>5))
+                    B ---|3| D((D<br/>13))
+                    C ---|2| D((D<br/>7))
+                    C ---|8| E((E<br/>13))
+                    D ---|4| E((E<br/>11))
+                    B ---|15| F((F<br/>25))
+                    E ---|7| F((F<br/>18))
+                    
+                    style A fill:#e74c3c,stroke:#c0392b,stroke-width:4px,color:#fff
+                    style C fill:#f39c12,stroke:#e67e22,stroke-width:3px,color:#fff
+                    style B fill:#3498db,stroke:#2980b9,stroke-width:3px,color:#fff
+                    style D fill:#2ecc71,stroke:#27ae60,stroke-width:2px,color:#fff
+                    style E fill:#1abc9c,stroke:#16a085,stroke-width:2px,color:#fff
+                    style F fill:#9b59b6,stroke:#8e44ad,stroke-width:2px,color:#fff
+                </div>
+                
+                <p><strong>Ejecución Paso a Paso:</strong></p>
+                <table>
+                    <tr>
+                        <th>Extraído</th>
+                        <th>Dist Actualizadas</th>
+                        <th>Cola Prioridad (min-heap)</th>
+                        <th>Visitados</th>
+                    </tr>
+                    <tr>
+                        <td>-</td>
+                        <td>Dist[A]=0</td>
+                        <td>[(A,0)]</td>
+                        <td>{}</td>
+                    </tr>
+                    <tr>
+                        <td>A</td>
+                        <td>Dist[B]=10, Dist[C]=5</td>
+                        <td>[(C,5), (B,10)]</td>
+                        <td>{A}</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>Dist[D]=7, Dist[E]=13</td>
+                        <td>[(B,10), (D,7), (E,13)]</td>
+                        <td>{A,C}</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>Dist[E]=11 (mejorado)</td>
+                        <td>[(B,10), (E,11)]</td>
+                        <td>{A,C,D}</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>Dist[F]=25 (nuevo)</td>
+                        <td>[(E,11), (F,25)]</td>
+                        <td>{A,C,D,B}</td>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <td>Dist[F]=18 (mejorado)</td>
+                        <td>[(F,18)]</td>
+                        <td>{A,C,D,B,E}</td>
+                    </tr>
+                    <tr>
+                        <td>F</td>
+                        <td>-</td>
+                        <td>[]</td>
+                        <td>{A,C,D,B,E,F}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="complexity">
+                <h4>⚙️ Análisis Riguroso de Complejidad</h4>
+                
+                <p>La complejidad temporal del algoritmo de Dijkstra no es un número fijo sino que depende críticamente de cómo implementamos la cola de prioridad Q. Esta dependencia ilustra un principio fundamental en algorítmica: la eficiencia de un algoritmo frecuentemente depende tanto de su lógica de alto nivel como de los detalles de implementación de bajo nivel.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Estructura de Datos</th>
+                            <th>EXTRACT-MIN</th>
+                            <th>DECREASE-KEY</th>
+                            <th>Complejidad Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Arreglo Simple</td>
+                            <td>O(V)</td>
+                            <td>O(1)</td>
+                            <td>O(V²)</td>
+                        </tr>
+                        <tr>
+                            <td>Min-Heap Binario</td>
+                            <td>O(log V)</td>
+                            <td>O(log V)</td>
+                            <td>O((V + E) log V)</td>
+                        </tr>
+                        <tr>
+                            <td>Fibonacci Heap</td>
+                            <td>O(log V)</td>
+                            <td>O(1) amortizado</td>
+                            <td>O(V log V + E)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p><strong>Análisis Detallado con Min-Heap Binario:</strong> Esta es la implementación más común en la práctica porque ofrece un buen equilibrio entre eficiencia y simplicidad de implementación. Un heap binario es un árbol completo donde cada padre tiene prioridad mayor o igual que sus hijos. Con esta estructura, EXTRACT-MIN requiere remover la raíz y reheapificar, lo cual toma O(log V) tiempo. Ejecutamos esta operación V veces, contribuyendo O(V log V) al tiempo total.</p>
+                
+                <p>Combinando ambas contribuciones, obtenemos O(V log V + E log V) que factorizamos como O((V + E) log V). Para grafos dispersos donde E es mucho menor que V², esto es significativamente mejor que la implementación con arreglo simple.</p>
+            </div>
+
+            <div class="concepts" style="background: #f3e5f5; padding: 15px; border-left: 5px solid #9c27b0; margin: 20px 0;">
+                <h4>⏸️ PUNTO DE PAUSA: Análisis de Complejidad</h4>
+                <p><strong>Ejercicio (5 minutos):</strong></p>
+                <p>En el grafo de ejemplo (V=6, E=8):</p>
+                <ul>
+                    <li><strong>Dijkstra con heap binario:</strong> ¿Cuántas operaciones log V? (extraer V veces, insertar/actualizar hasta E veces)</li>
+                    <li><strong>Versión ingenua (sin heap):</strong> O(V²) – ¿Por qué peor en grafos dispersos?</li>
+                    <li><strong>Pregunta:</strong> Si agregamos un nodo con 100 vecinos, ¿cómo afecta la complejidad?</li>
+                </ul>
+                <details>
+                    <summary>Ver respuestas</summary>
+                    <ul>
+                        <li>O(V log V + E log V) ≈ O(6 log 6 + 8 log 6) ≈ 40 operaciones</li>
+                        <li>Ingénua: O(V²)=36, pero escalable peor en E >> V</li>
+                        <li>Aumenta E, por lo que más actualizaciones log V; heap maneja bien</li>
+                    </ul>
+                </details>
+            </div>
+
+            <div class="warning">
+                <h4>⚠️ Limitaciones de Dijkstra</h4>
+                <ul>
+                    <li><strong>Pesos Negativos:</strong> No garantiza óptimo; usa Bellman-Ford</li>
+                    <li><strong>Grafos Densos:</strong> O(V²) eficiente; dispersos prefieren heap</li>
+                    <li><strong>Actualizaciones Dinámicas:</strong> Tráfico cambia → re-ejecutar o A* (Semana 7)</li>
+                </ul>
+            </div>
+
+            <p><a href="#floyd">Continuar → Floyd-Warshall</a></p>
+        </section>
+
+        <!-- FLOYD-WARSHALL -->
+        <section id="floyd" class="section">
+            <h2>🔗 2.3.3. Algoritmo de Floyd-Warshall: Caminos Más Cortos entre Todos los Pares</h2>
+            
+            <h3>Concepto Fundamental</h3>
+            <p><span class="emoji">🟣</span> <strong>Floyd-Warshall</strong> computa distancias mínimas entre <em>todos los pares</em> de nodos usando <strong>programación dinámica</strong>. Considera cada nodo como posible intermediario.</p>
+            
+            <div class="concepts">
+                <h4>Características Clave</h4>
+                <ul>
+                    <li><strong>Estructura de Datos:</strong> Matriz de distancias (V x V)</li>
+                    <li><strong>Orden de Exploración:</strong> Por nodos intermedios k=1 a V</li>
+                    <li><strong>Garantía:</strong> Maneja pesos negativos (sin ciclos negativos); detecta ciclos negativos</li>
+                    <li><strong>Complejidad Temporal:</strong> O(V³) – fijo, independientemente de E</li>
+                    <li><strong>Complejidad Espacial:</strong> O(V²) para matriz</li>
+                </ul>
+            </div>
+
+            <h3>Algoritmo Floyd-Warshall</h3>
+            <pre><code>Para cada par (i,j): Dist[i][j] = peso(i,j) si arista, ∞ si no, 0 si i==j
+
+Para k = 1 a V:  // k como intermediario posible
+    Para i = 1 a V:
+        Para j = 1 a V:
+            Si Dist[i][j] > Dist[i][k] + Dist[k][j]:
+                Dist[i][j] = Dist[i][k] + Dist[k][j]
+                Padre[i][j] = Padre[k][j]  // Para reconstruir camino</code></pre>
+
+            <div class="visualization">
+                <h4>🎨 Visualización Floyd-Warshall</h4>
+                <p>Matríz inicial y evolución para grafo pequeño (nodos 1-3):</p>
+                
+                <div class="mermaid" data-alt="Evolución de matriz en Floyd-Warshall por k">
+                graph LR
+                    subgraph "Matriz Inicial"
+                    D1["1→1:0 | 1→2:4 | 1→3:∞"]
+                    D2["2→1:∞ | 2→2:0 | 2→3:2"]
+                    D3["3→1:3 | 3→2:∞ | 3→3:0"]
+                    end
+                    subgraph "Tras k=1"
+                    E1["1→1:0 | 1→2:4 | 1→3:∞"]
+                    E2["2→1:∞ | 2→2:0 | 2→3:2"]
+                    E3["3→1:3 | 3→2:∞ | 3→3:0"]
+                    end
+                    subgraph "Tras k=2"
+                    F1["1→1:0 | 1→2:4 | 1→3:6 (1-2-3)"]
+                    F2["2→1:∞ | 2→2:0 | 2→3:2"]
+                    F3["3→1:3 | 3→2:∞ | 3→3:0"]
+                    end
+                    subgraph "Tras k=3"
+                    G1["1→1:0 | 1→2:4 | 1→3:6"]
+                    G2["2→1:7 (2-3-1) | 2→2:0 | 2→3:2"]
+                    G3["3→1:3 | 3→2:∞ | 3→3:0"]
+                    end
+                </div>
+                
+                <p><strong>Resultado Final:</strong> Matriz completa de distancias mínimas.</p>
+            </div>
+
+            <div class="application">
+                <h4>🔍 Aplicaciones Específicas</h4>
+                
+                <h5>Caso 1: Análisis de Redes Complejas (Sociales, Biológicas)</h5>
+                <p><strong>Problema:</strong> Distancias promedio entre todos los usuarios/proteínas.</p>
+                <ul>
+                    <li>Floyd-Warshall precomputa para consultas rápidas O(1)</li>
+                    <li>Útil en grafos densos donde V es pequeño (V<1000)</li>
+                </ul>
+                
+                <h5>Caso 2: Optimización de Circuitos Eléctricos</h5>
+                <p><strong>Problema:</strong> Menor resistencia entre todos los nodos.</p>
+                <ul>
+                    <li>Pesos: Resistencias; detecta ciclos negativos (imposibles físicamente)</li>
+                </ul>
+                
+                <h5>Caso 3: Planificación Estratégica (Matriz de Costos)</h5>
+                <p><strong>Problema:</strong> Costos mínimos entre todas las ciudades/almacenes.</p>
+                <ul>
+                    <li>Precomputar para decisiones rápidas en supply chain</li>
+                </ul>
+            </div>
+
+            <div class="complexity">
+                <h4>⚙️ Análisis de Complejidad</h4>
+                
+                <p><strong>Complejidad Temporal:</strong> La estructura de tres bucles anidados, cada uno ejecutándose V veces, resulta en complejidad temporal O(V³). Esta complejidad cúbica es independiente del número de aristas E: el algoritmo procesa todas las V³ triplas posibles de nodos.</p>
+                
+                <p><strong>Complejidad Espacial:</strong> Requerimos espacio O(V²) para almacenar la matriz de distancias D y la matriz de predecesores P. No necesitamos espacio adicional significativo más allá de variables auxiliares.</p>
+                
+                <p><strong>Ventajas de Floyd-Warshall:</strong> Su implementación es extremadamente simple: apenas tres bucles for anidados sin estructuras de datos complejas. Esta simplicidad reduce la probabilidad de errores. Además, puede manejar aristas con pesos negativos siempre que no existan ciclos negativos. Finalmente, detecta ciclos negativos automáticamente sin código adicional.</p>
+            </div>
+
+            <div class="warning">
+                <h4>⚠️ Cuidado con Floyd-Warshall</h4>
+                <ul>
+                    <li><strong>Escala:</strong> O(V³) inviable para V>1000; usa Dijkstra x V para grandes grafos</li>
+                    <li><strong>Ciclos Negativos:</strong> Detecta si Dist[i][i] < 0</li>
+                    <li><strong>Espacio:</strong> O(V²) ~ 1GB para V=10k; optimiza con sparse matrices</li>
+                </ul>
+            </div>
+
+            <p><a href="#comparison">Continuar → Comparación</a></p>
+        </section>
+
+        <!-- COMPARACIÓN -->
+        <section id="comparison" class="section">
+            <h2>⚖️ 2.3.4. Análisis Comparativo: Dijkstra vs Floyd-Warshall</h2>
+            
+            <div class="comparison">
+                <h3>Tabla Comparativa Exhaustiva</h3>
+                <table>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Dijkstra</th>
+                        <th>Floyd-Warshall</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Problema Resuelto</strong></td>
+                        <td>Un origen a todos</td>
+                        <td>Todos los pares</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pesos Negativos</strong></td>
+                        <td>❌ No</td>
+                        <td>✅ Sí (sin ciclos neg.)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complejidad Temporal</strong></td>
+                        <td>O((V+E) log V)</td>
+                        <td>O(V³)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Complejidad Espacial</strong></td>
+                        <td>O(V)</td>
+                        <td>O(V²)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mejor para Grafos</strong></td>
+                        <td>Dispersos (E << V²)</td>
+                        <td>Densos (E ≈ V²)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Implementación</strong></td>
+                        <td>Heap + lista ady.</td>
+                        <td>Matriz DP</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Casos Típicos</strong></td>
+                        <td>GPS, enrutamiento IP</td>
+                        <td>Análisis redes, circuitos</td>
+                    </tr>
+                </table>
+                
+                <div class="concepts" style="margin-top: 20px; background: #fff3cd; padding: 15px; border-left: 5px solid #f39c12;">
+                    <h4>📐 Mini-Ejercicio: Selección Óptima</h4>
+                    <p><strong>Escenarios:</strong></p>
+                    <table>
+                        <tr>
+                            <th>Escenario</th>
+                            <th>V</th>
+                            <th>E</th>
+                            <th>Consulta</th>
+                            <th>Algoritmo Recomendado</th>
+                        </tr>
+                        <tr>
+                            <td>Red social (V=1M, E=10M)</td>
+                            <td>1M</td>
+                            <td>10M</td>
+                            <td>Desde usuario X</td>
+                            <td>Dijkstra</td>
+                        </tr>
+                        <tr>
+                            <td>Circuito (V=50, E=1225)</td>
+                            <td>50</td>
+                            <td>1225</td>
+                            <td>Todos los pares</td>
+                            <td>Floyd-Warshall</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="concepts">
+                <h3>🧠 Guía de Decisión</h3>
+                <h4>Usa Dijkstra cuando:</h4>
+                <ul>
+                    <li>✅ Un origen único, consultas repetidas desde mismo s</li>
+                    <li>✅ Grafos dispersos, pesos no negativos</li>
+                    <li>✅ Escala grande (V>1000)</li>
+                </ul>
+                <h4>Usa Floyd-Warshall cuando:</h4>
+                <ul>
+                    <li>✅ Necesitas todos los pares, precomputación OK</li>
+                    <li>✅ Grafos densos o pequeños (V<500)</li>
+                    <li>✅ Posibles pesos negativos</li>
+                </ul>
+            </div>
+
+            <p><a href="#solution-py">Continuar → Implementaciones en Código</a></p>
+        </section>
+
+        <!-- CHECKPOINT PRE-CÓDIGO -->
+        <section class="section checkpoint">
+            <h3 style="color: #e67e22; border-bottom: none;">⏸️ CHECKPOINT: Autoevaluación Pre-Código</h3>
+            <p><strong>Verifica comprensión:</strong></p>
+            <ol>
+                <li>¿Diferencia clave entre BFS y Dijkstra?</li>
+                <li>Verdadero/Falso: "Floyd-Warshall es O(V² log V)"</li>
+                <li>¿Cuándo falla Dijkstra?</li>
+                <li>Pseudocódigo: 3 pasos de Dijkstra</li>
+            </ol>
+            <details>
+                <summary>Respuestas</summary>
+                <ol>
+                    <li>BFS: no pesos; Dijkstra: pesos no neg., usa heap</li>
+                    <li>Falso: O(V³)</li>
+                    <li>Pesos negativos</li>
+                    <li>1. Init dist/origen. 2. Extraer min, relajar vecinos. 3. Hasta cola vacía</li>
+                </ol>
+            </details>
+        </section>
+
+        <!-- CÓDIGO PYTHON -->
+        <section id="solution-py" class="section">
+            <h2>🐍 Implementación en Python</h2>
+            <pre><code>import heapq
+import math
+from collections import defaultdict
+from typing import Dict, List, Tuple
+
+class WeightedGraph:
+    def __init__(self, n: int):
+        self.n = n
+        self.adj = {i: [] for i in range(n)}
+    
+    def add_edge(self, u: int, v: int, w: float):
+        self.adj[u].append((v, w))
+        # Para no dirigido: self.adj[v].append((u, w))
+    
+    # Dijkstra
+    def dijkstra(self, src: int) -> Tuple[List[float], List[int]]:
+        dist = [math.inf] * self.n
+        parent = [-1] * self.n
+        dist[src] = 0
+        pq = [(0, src)]  # (dist, node)
+        visited = [False] * self.n
+        
+        while pq:
+            cost, u = heapq.heappop(pq)
+            if visited[u]: continue
+            visited[u] = True
+            
+            for v, w in self.adj[u]:
+                if dist[u] + w < dist[v]:
+                    dist[v] = dist[u] + w
+                    parent[v] = u
+                    heapq.heappush(pq, (dist[v], v))
+        
+        return dist, parent
+    
+    # Floyd-Warshall
+    def floyd_warshall(self) -> List[List[float]]:
+        dist = [[math.inf] * self.n for _ in range(self.n)]
+        for i in range(self.n):
+            dist[i][i] = 0
+        
+        for u in range(self.n):
+            for v, w in self.adj[u]:
+                dist[u][v] = w
+        
+        for k in range(self.n):
+            for i in range(self.n):
+                for j in range(self.n):
+                    if dist[i][k] + dist[k][j] < dist[i][j]:
+                        dist[i][j] = dist[i][k] + dist[k][j]
+        
+        # Detectar ciclos negativos
+        for i in range(self.n):
+            if dist[i][i] < 0:
+                raise ValueError("Ciclo negativo detectado")
+        
+        return dist
+
+# Ejemplo de uso
+g = WeightedGraph(6)
+g.add_edge(0,1,10); g.add_edge(0,2,5)
+g.add_edge(1,3,3); g.add_edge(2,3,2); g.add_edge(2,4,8)
+g.add_edge(3,4,4); g.add_edge(1,5,15); g.add_edge(4,5,7)
+
+dist, parent = g.dijkstra(0)
+print(f"Dist a F: {dist[5]}")  # 18
+
+fw = g.floyd_warshall()
+print(f"FW dist 0-5: {fw[0][5]}")  # 18
+</code></pre>
+        </section>
+
+        <!-- APLICACIONES -->
+        <section id="applications" class="section">
+            <h2>🌐 Aplicaciones Prácticas</h2>
+            
+            <div class="application">
+                <h3>Caso 1: Optimizador de Rutas GPS con Tráfico</h3>
+                <pre><code># Python: Extensión de Dijkstra con pesos dinámicos
+def dijkstra_con_trafico(grafo: WeightedGraph, src: int, trafico_actual: Dict[Tuple[int, int], float]):
+    # trafico_actual: dict de aristas a multiplicador (1.0 normal, 2.0 congestionado)
+    dist, parent = grafo.dijkstra(src)
+    # Post-procesar: ajustar pesos con tráfico y re-relajar si necesario
+    # (Implementación simplificada; en prod usa A* con heurística)
+    return dist, parent
+</code></pre>
+            </div>
+
+            <div class="application">
+                <h3>Caso 2: Análisis de Redes IP (Protocolo OSPF)</h3>
+                <pre><code># Python: Simulación de router
+class Router:
+    def compute_routing_table(self, network: WeightedGraph, this_router: int):
+        dist, _ = network.dijkstra(this_router)
+        return dist  # Tabla: dist a cada destino
+
+router = Router()
+# Uso similar
+</code></pre>
+            </div>
+
+            <div class="application">
+                <h3>Caso 3: Análisis de Accesibilidad Urbana</h3>
+                <p><strong>Contexto:</strong> Calcular tiempos de respuesta de emergencias desde hospitales.</p>
+                <pre><code># Usando Floyd-Warshall para precomputar
+def analizar_accesibilidad(grafo_hospitales: WeightedGraph, hospitales: List[int], nodos_ciudad: List[int]):
+    matriz_tiempos = grafo_hospitales.floyd_warshall()
+    accesibilidad = {}
+    for hospital in hospitales:
+        for ciudad in nodos_ciudad:
+            tiempo = matriz_tiempos[hospital][ciudad]
+            if tiempo <= 15:  # Minutos aceptable
+                accesibilidad[ciudad] = 'Alta'
+            else:
+                accesibilidad[ciudad] = 'Baja'
+    return accesibilidad
+</code></pre>
+            </div>
+
+            <div class="application" style="background: #f0f8ff; border-left: 5px solid #4a90e2;">
+                <h3>Caso 4: Optimización en Finanzas (Arbitraje en Cripto)</h3>
+                <p><strong>Contexto:</strong> Detectar oportunidades de arbitraje en exchanges de criptomonedas.</p>
+                <pre><code># Grafo: Nodos=exchanges, Pesos=1/cotización (menor peso = mejor tasa)
+def detectar_arbitraje(grafo_cripto: WeightedGraph):
+    try:
+        fw = grafo_cripto.floyd_warshall()
+        for i in range(grafo_cripto.n):
+            if fw[i][i] < 0:  # Ciclo negativo = arbitraje
+                print(f"¡Oportunidad! Ciclo en {i}: ganancia {abs(fw[i][i])}%")
+    except ValueError:
+        print("Ciclo negativo: arbitraje posible")
+</code></pre>
+                <p><strong>Advertencia:</strong> En la práctica, incluye fees y latencia; usa Dijkstra para rutas específicas.</p>
+            </div>
+
+            <p><a href="#test-cases">Continuar → Casos de Prueba</a></p>
+        </section>
+
+        <!-- CASOS DE PRUEBA -->
+        <section id="test-cases" class="section">
+            <h2>🧪 Casos de Prueba</h2>
+            
+            <h3>Suite de Pruebas para Dijkstra</h3>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Descripción</th>
+                    <th>Input</th>
+                    <th>Salida Esperada</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Grafo ponderado simple</td>
+                    <td>Aristas: (0,1,10),(0,2,5),(2,3,2),(1,3,3); src=0</td>
+                    <td>Dist[3]=7 (vía 0-2-3)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Grafo con pesos cero</td>
+                    <td>Aristas: (0,1,0),(1,2,5); src=0</td>
+                    <td>Dist[2]=5</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Grafo desconectado</td>
+                    <td>Aristas: (0,1,10); src=0</td>
+                    <td>Dist[2]=∞</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Nodo único</td>
+                    <td>Sin aristas; src=0</td>
+                    <td>Dist[0]=0</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Camino más corto con múltiples opciones</td>
+                    <td>Aristas: (0,1,4),(0,2,2),(1,3,1),(2,3,3); src=0</td>
+                    <td>Dist[3]=3 (vía 0-1-3)</td>
+                </tr>
+            </table>
+
+            <h3>Suite de Pruebas para Floyd-Warshall</h3>
+            <table>
+                <tr>
+                    <th>#</th>
+                    <th>Descripción</th>
+                    <th>Input</th>
+                    <th>Salida Esperada</th>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Grafo denso pequeño</td>
+                    <td>Aristas: (0,1,4),(1,2,2),(2,0,3)</td>
+                    <td>Dist[0][2]=5 (0-1-2)</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Con pesos negativos (sin ciclo)</td>
+                    <td>Aristas: (0,1,2),(1,2,-1)</td>
+                    <td>Dist[0][2]=1 (0-1-2)</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Ciclo negativo detectado</td>
+                    <td>Aristas: (0,1,-2),(1,0,-1)</td>
+                    <td>Excepción: Ciclo negativo</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Grafo completo</td>
+                    <td>3 nodos, todas aristas</td>
+                    <td>Matriz completa con mínimas</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Desconectado</td>
+                    <td>Aristas: (0,1,10); nodos 0-2</td>
+                    <td>Dist[0][2]=∞</td>
+                </tr>
+            </table>
+
+            <h3>Tests Unitarios en Python (pytest)</h3>
+            <pre><code>import pytest
+import math
+from weighted_graph import WeightedGraph  # Asumir archivo con clase
+
+def test_dijkstra_simple():
+    g = WeightedGraph(4)
+    g.add_edge(0, 1, 10)
+    g.add_edge(0, 2, 5)
+    g.add_edge(2, 3, 2)
+    g.add_edge(1, 3, 3)
+    
+    dist, _ = g.dijkstra(0)
+    assert dist[3] == 7
+    assert math.isinf(dist[3]) == False
+
+def test_dijkstra_zero_weight():
+    g = WeightedGraph(3)
+    g.add_edge(0, 1, 0)
+    g.add_edge(1, 2, 5)
+    
+    dist, _ = g.dijkstra(0)
+    assert dist[2] == 5
+
+def test_dijkstra_disconnected():
+    g = WeightedGraph(3)
+    g.add_edge(0, 1, 10)
+    
+    dist, _ = g.dijkstra(0)
+    assert math.isinf(dist[2])
+
+def test_dijkstra_single_node():
+    g = WeightedGraph(1)
+    
+    dist, _ = g.dijkstra(0)
+    assert dist[0] == 0
+
+def test_floyd_warshall_simple():
+    g = WeightedGraph(3)
+    g.add_edge(0, 1, 4)
+    g.add_edge(1, 2, 2)
+    g.add_edge(2, 0, 3)
+    
+    fw = g.floyd_warshall()
+    assert fw[0][2] == 5  # 0-1-2
+
+def test_floyd_warshall_negative_no_cycle():
+    g = WeightedGraph(3)
+    g.add_edge(0, 1, 2)
+    g.add_edge(1, 2, -1)
+    
+    fw = g.floyd_warshall()
+    assert fw[0][2] == 1
+
+def test_floyd_warshall_negative_cycle():
+    g = WeightedGraph(2)
+    g.add_edge(0, 1, -2)
+    g.add_edge(1, 0, -1)
+    
+    with pytest.raises(ValueError):
+        g.floyd_warshall()
+
+def test_floyd_warshall_disconnected():
+    g = WeightedGraph(3)
+    g.add_edge(0, 1, 10)
+    
+    fw = g.floyd_warshall()
+    assert math.isinf(fw[0][2])
+
+# Edge cases
+def test_dijkstra_non_existent_src():
+    g = WeightedGraph(1)
+    with pytest.raises(IndexError):
+        g.dijkstra(1)
+
+def test_floyd_warshall_empty():
+    g = WeightedGraph(0)
+    with pytest.raises(ValueError):
+        g.floyd_warshall()
+
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
+</code></pre>
+
+            <div class="concepts" style="background: #e8f8f5; padding: 15px; border-left: 5px solid #1abc9c; margin: 20px 0;">
+                <h4>▶️ Cómo Ejecutar los Tests</h4>
+                <pre><code># En terminal
+pip install pytest  # Si no instalado
+pytest test_weighted_graph.py -v
+
+# Específicos
+pytest test_weighted_graph.py::test_dijkstra_simple -v
+
+# Cobertura
+pytest --cov=weighted_graph test_weighted_graph.py
+
+# Detener en error
+pytest -x
+
+# Ver prints
+pytest -s
+</code></pre>
+                <p><strong>Salida esperada:</strong> 10 passed in 0.10s</p>
+            </div>
+
+            <p><a href="#ia-activities">Continuar → Actividades con IA</a></p>
+        </section>
+
+        <!-- ACTIVIDADES IA -->
+        <section id="ia-activities" class="section">
+            <h2>🤖 Actividades con Inteligencia Artificial</h2>
+            
+            <div class="ia-activity">
+                <h3><span class="prompt-number">PROMPT #1</span> Análisis Comparativo Personalizado</h3>
+                <h4>Objetivo: Profundizar entendimiento de Dijkstra vs Floyd-Warshall</h4>
+                
+                <div class="ia-prompt">Contexto: Soy estudiante de estructuras de datos y acabo de implementar Dijkstra y Floyd-Warshall en Python.
+
+Tarea: Genera 5 escenarios de problemas del mundo real (ej. GPS, redes IP, logística) y para cada uno:
+1. Describe brevemente el problema
+2. Explica si usarías Dijkstra o Floyd-Warshall y POR QUÉ
+3. Justifica tu elección con propiedades específicas del algoritmo (complejidad, garantías, etc.)
+4. Menciona una desventaja de usar el otro algoritmo
+
+Formato: Tabla comparativa concisa.</div>
+                
+                <p><strong>Reflexión Post-IA:</strong></p>
+                <ul>
+                    <li>¿Los escenarios del IA coinciden con tu intuición?</li>
+                    <li>¿Identificaste algún caso donde ambos algoritmos son igualmente válidos?</li>
+                    <li>¿Qué criterio adicional no mencionó la IA que consideras importante?</li>
+                </ul>
+            </div>
+
+            <div class="ia-activity">
+                <h3><span class="prompt-number">PROMPT #2</span> Optimización de Código</h3>
+                <h4>Objetivo: Mejorar implementaciones</h4>
+                
+                <div class="ia-prompt">Aquí está mi implementación de Dijkstra en Python:
+
+[PEGA TU CÓDIGO AQUÍ]
+
+Tarea: Analiza mi código y sugiere mejoras en:
+1. **Eficiencia:** ¿Hay operaciones redundantes? ¿Se puede optimizar complejidad espacial?
+2. **Claridad:** ¿El código es legible? ¿Los nombres de variables son descriptivos?
+3. **Robustez:** ¿Maneja casos límite (grafo vacío, nodo inexistente, pesos negativos)?
+4. **Extensibilidad:** ¿Qué funcionalidad adicional sería útil? (ej. Dijkstra bidireccional)
+
+Formato: Enumera mejoras con código de ejemplo para cada una.</div>
+                
+                <p><strong>Actividad de Validación:</strong></p>
+                <ol>
+                    <li>Implementa <strong>al menos 2</strong> de las mejoras sugeridas</li>
+                    <li>Ejecuta tests antes y después para verificar que funcionan</li>
+                    <li>Documenta el cambio en comentarios: <code># Optimización sugerida por IA: [descripción]</code></li>
+                </ol>
+            </div>
+
+            <div class="ia-activity">
+                <h3><span class="prompt-number">PROMPT #3</span> Depuración con IA</h3>
+                <h4>Objetivo: Resolver bugs usando IA como asistente</h4>
+                
+                <div class="ia-prompt">Mi implementación de Floyd-Warshall está fallando el siguiente test:
+
+**Input:** Grafo: 0→1:2, 1→2:-1, 2→0:-4 (debería detectar ciclo negativo)
+**Resultado esperado:** ValueError (ciclo negativo)
+**Resultado obtenido:** No lanza excepción, calcula dist[0][0]=-3
+
+Mi código:
+[PEGA TU CÓDIGO DE floyd_warshall AQUÍ]
+
+Tarea: 
+1. Identifica el bug explicando la lógica incorrecta
+2. Sugiere la corrección específica
+3. Explica por qué esa corrección funciona
+4. Proporciona una traza paso a paso del algoritmo corregido con el input de ejemplo</div>
+                
+                <p><strong>Proceso de Aprendizaje:</strong></p>
+                <ul>
+                    <li>Antes de ver la respuesta de IA, intenta depurar manualmente por 10 minutos</li>
+                    <li>Compara tu diagnóstico con el de la IA</li>
+                    <li>Aplica la corrección y valida con tests adicionales</li>
+                </ul>
+            </div>
+
+            <div class="ia-activity">
+                <h3><span class="prompt-number">PROMPT #4</span> Generación de Visualizaciones</h3>
+                <h4>Objetivo: Crear diagramas Mermaid para documentar</h4>
+                
+                <div class="ia-prompt">Necesito visualizar la ejecución de Floyd-Warshall en el siguiente grafo ponderado para mi reporte:
+
+**Grafo (lista de adyacencia con pesos):**
+{
+  0: [(1,4), (2,11)],
+  1: [(2,2)],
+  2: [(0,6), (3,7)],
+  3: [(1,2)]
+}
+
+Tarea: Genera:
+1. Diagrama Mermaid del grafo con pesos en aristas
+2. Tabla HTML paso a paso de FW mostrando matriz tras cada k: [k | Matriz Dist]
+3. Sugerencias de cómo colorear celdas por actualización en Mermaid o HTML
+
+Formato: Código Mermaid listo para copiar + tabla HTML.</div>
+                
+                <p><strong>Post-Procesamiento:</strong></p>
+                <ol>
+                    <li>Copia el código Mermaid y verifica que renderiza correctamente</li>
+                    <li>Si hay errores de sintaxis, pide correcciones específicas a la IA</li>
+                    <li>Personaliza colores/estilos para que coincidan con tu reporte</li>
+                    <li><strong>Documenta:</strong> "Visualización generada con IA (PROMPT #4), estilos personalizados manualmente"</li>
+                </ol>
+            </div>
+
+            <div class="ia-activity">
+                <h3><span class="prompt-number">PROMPT #5</span> Caso de Estudio Avanzado</h3>
+                <h4>Objetivo: Aplicar Dijkstra/FW a problema complejo</h4>
+                
+                <div class="ia-prompt">**Problema:** Optimización de red de transporte público en una ciudad
+
+Contexto: Tengo un grafo de 50 estaciones de metro con tiempos de viaje ponderados. Necesito:
+1. Calcular tiempos desde cada estación central a todas (Dijkstra x V)
+2. Precomputar matriz completa para consultas rápidas (Floyd-Warshall)
+3. Identificar "estaciones bottleneck" (alta centralidad de distancia)
+4. Simular impacto de cerrar una estación (re-ejecutar FW)
+5. Recomendar nuevas conexiones para reducir tiempo promedio
+
+Entregables:
+- Pseudocódigo de las 5 funcionalidades en Python
+- Estructura de datos recomendada (NetworkX?)
+- Análisis de complejidad y trade-offs
+- Ejemplo con 5 estaciones reales de CDMX</div>
+                
+                <p><strong>Proyecto Mini:</strong></p>
+                <ul>
+                    <li>Implementa el sistema propuesto por la IA en Python</li>
+                    <li>Usa datos reales de metro (o inventa 10 estaciones coherentes)</li>
+                    <li>Genera un reporte PDF con: matriz FW, visualización de bottlenecks, recomendaciones</li>
+                    <li><strong>Reflexión crítica:</strong> ¿La solución de IA es óptima? ¿Qué mejorarías?</li>
+                </ul>
+            </div>
+
+            <div class="checklist">
+                <h3>✅ Rúbrica de Uso Ético de IA</h3>
+                <p><strong>Para aprobar las actividades con IA, debes demostrar:</strong></p>
+                <ul>
+                    <li><input type="checkbox" aria-label="Atribución"> <strong>Atribución:</strong> Cada uso de IA está documentado con número de prompt (ej. PROMPT #2)</li>
+                    <li><input type="checkbox" aria-label="Comprensión"> <strong>Comprensión:</strong> Puedes explicar verbalmente cualquier código/idea generada por IA</li>
+                    <li><input type="checkbox" aria-label="Modificación"> <strong>Modificación:</strong> Has personalizado o mejorado las respuestas de IA (no copiar-pegar ciego)</li>
+                    <li><input type="checkbox" aria-label="Validación"> <strong>Validación:</strong> Has verificado la corrección de las sugerencias de IA con tests</li>
+                    <li><input type="checkbox" aria-label="Reflexión"> <strong>Reflexión:</strong> Incluyes análisis crítico: ¿qué hizo bien la IA? ¿qué faltó?</li>
+                </ul>
+                
+                <p><strong>❌ Uso No Ético de IA (resulta en 0 puntos):</strong></p>
+                <ul>
+                    <li>Copiar código de IA sin entender cómo funciona</li>
+                    <li>No poder explicar o reproducir tu solución en vivo</li>
+                    <li>No documentar el uso de IA en el reporte/código</li>
+                    <li>Usar IA para resolver todo sin esfuerzo propio significativo</li>
+                </ul>
+            </div>
+
+            <p><a href="#project">Continuar → Proyecto Integrador</a></p>
+        </section>
+
+        <!-- PROYECTO INTEGRADOR -->
+        <section id="project" class="section project">
+            <h2>🚀 Proyecto Integrador: Avance 4 - Optimización de Rutas Urbanas</h2>
+            
+            <h3>Semana 6: Integración de Algoritmos Ponderados</h3>
+            <p><strong>Fecha límite:</strong> Fin de Semana 6 | <strong>Valor:</strong> 25% del proyecto total</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                <div>
+                    <h4>📋 Requisitos Funcionales</h4>
+                    <ol>
+                        <li><strong>Implementar Dijkstra Completo:</strong>
+                            <ul>
+                                <li>Distancias ponderadas desde intersección origen</li>
+                                <li>Camino más corto reconstruido con padres</li>
+                                <li>Manejo de pesos dinámicos (ej. tráfico)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implementar Floyd-Warshall:</strong>
+                            <ul>
+                                <li>Matriz de todos los pares</li>
+                                <li>Detección de ciclos negativos (si aplica)</li>
+                                <li>Reconstrucción de caminos vía matriz padre</li>
+                            </ul>
+                        </li>
+                        <li><strong>Análisis Práctico:</strong>
+                            <ul>
+                                <li>Tiempo promedio de viaje en tu ciudad</li>
+                                <li>Estaciones "centrales" (menor distancia media)</li>
+                                <li>Impacto de cerrar una intersección clave</li>
+                            </ul>
+                        </li>
+                        <li><strong>Aplicación de Caso de Uso:</strong>
+                            <ul>
+                                <li>Elige 1: Optimizador GPS con tráfico, Análisis de accesibilidad, o Planificación logística</li>
+                                <li>Implementa usando Dijkstra/FW en Python</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div>
+                    <h4>📄 Entregables</h4>
+                    <ul>
+                        <li><strong>Código:</strong>
+                            <ul>
+                                <li>Integración de algoritmos ponderados al proyecto</li>
+                                <li>Clases: <code>WeightedGraph</code>, <code>RouteOptimizer</code></li>
+                                <li>Tests unitarios (mínimo 10 tests)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Reporte PDF (6-8 páginas):</strong>
+                            <ul>
+                                <li>Análisis de distancias ponderadas en el mapa</li>
+                                <li>Tabla: 5 rutas óptimas con tiempos y caminos</li>
+                                <li>Visualización: Matriz FW resumida + grafo con pesos</li>
+                                <li>Caso de uso: descripción + resultados numéricos</li>
+                                <li>Análisis comparativo Dijkstra vs FW en tu contexto</li>
+                                <li>Reflexión: ¿Qué algoritmo escaló mejor en tu grafo?</li>
+                            </ul>
+                        </li>
+                        <li><strong>(Opcional) Demo Interactivo:</strong>
+                            <ul>
+                                <li>App Streamlit/Flask para consultar rutas</li>
+                                <li>Visualización de caminos en mapa (Folium/NetworkX)</li>
+                                <li>+10% bonus en este avance</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="warning">
+                <h4>⚠️ Errores Comunes a Evitar en el Avance 4</h4>
+                <ul>
+                    <li>No integrar con código de semanas previas (BFS/DFS)</li>
+                    <li>Olvidar pesos negativos en FW (no detectarlos)</li>
+                    <li>Usar FW para grafos grandes (V>200) sin justificación</li>
+                    <li>No reconstruir caminos (solo distancias)</li>
+                    <li>Análisis sin datos reales (usa pesos de distancias reales)</li>
+                    <li>No probar con tráfico dinámico en Dijkstra</li>
+                    <li>Reporte sin visualizaciones cuantitativas (tablas/matrices)</li>
+                </ul>
+            </div>
+
+            <div class="concepts">
+                <h4>💡 Sugerencias de Caso de Uso Sobresaliente</h4>
+                
+                <p><strong>Opción 1: Simulador de Tráfico Dinámico</strong></p>
+                <ul>
+                    <li>Modifica pesos en runtime (tráfico +20% en horas pico)</li>
+                    <li>Compara Dijkstra antes/durante pico</li>
+                    <li>Visualiza cambios en mapa con colores (rojo=congestión)</li>
+                </ul>
+                
+                <p><strong>Opción 2: Análisis de Resiliencia Urbana</strong></p>
+                <ul>
+                    <li>Usa FW para baseline, luego remueve aristas y re-ejecuta</li>
+                    <li>Identifica "puentes críticos" (aumento >50% en dist media)</li>
+                    <li>Propone alternativas (nuevas aristas)</li>
+                </ul>
+                
+                <p><strong>Opción 3: Optimizador Logístico Multi-Modal</strong></p>
+                <ul>
+                    <li>Integra modos: auto (Dijkstra), todos pares (FW para planificación)</li>
+                    <li>Pesos híbridos: tiempo + costo CO2</li>
+                    <li>Calcula rutas "verdes" vs "rápidas"</li>
+                </ul>
+            </div>
+
+            <div class="checklist">
+                <h3>✅ Checklist de Pre-Entrega (Avance 4)</h3>
+                <ul>
+                    <li><input type="checkbox" aria-label="Dijkstra implementado"> Dijkstra con heap y reconstrucción de caminos</li>
+                    <li><input type="checkbox" aria-label="FW implementado"> Floyd-Warshall con detección de ciclos negativos</li>
+                    <li><input type="checkbox" aria-label="Integración"> Código integrado con Semanas 3-5 (grafo ponderado cohesivo)</li>
+                    <li><input type="checkbox" aria-label="Tests"> Mínimo 10 tests unitarios pasando (5 Dijkstra + 5 FW)</li>
+                    <li><input type="checkbox" aria-label="Análisis ponderado"> Análisis de tiempos/dist ponderadas completado</li>
+                    <li><input type="checkbox" aria-label="Caso de uso"> Caso de uso implementado y documentado</li>
+                    <li><input type="checkbox" aria-label="Visualizaciones"> Al menos 2 visualizaciones (matriz + grafo ponderado)</li>
+                    <li><input type="checkbox" aria-label="Tabla rutas"> Tabla con 5 rutas óptimas y comparaciones</li>
+                    <li><input type="checkbox" aria-label="Análisis comp"> Análisis crítico Dijkstra vs FW en tu grafo</li>
+                    <li><input type="checkbox" aria-label="Atribución IA"> (Si aplica) Uso de IA documentado con números de prompt</li>
+                </ul>
+            </div>
+
+            <h4>📊 Criterios de Evaluación del Avance 4</h4>
+            <table>
+                <tr>
+                    <th>Componente</th>
+                    <th>Puntos</th>
+                    <th>Criterio de Excelencia</th>
+                </tr>
+                <tr>
+                    <td><strong>Implementación Dijkstra</strong></td>
+                    <td>20</td>
+                    <td>Eficiente con heap, maneja dinámicos, reconstruye caminos</td>
+                </tr>
+                <tr>
+                    <td><strong>Implementación FW</strong></td>
+                    <td>20</td>
+                    <td>DP correcto, detecta negativos, matriz padre para paths</td>
+                </tr>
+                <tr>
+                    <td><strong>Aplicación al Mapa Real</strong></td>
+                    <td>20</td>
+                    <td>Análisis ponderado profundo, resultados realistas</td>
+                </tr>
+                <tr>
+                    <td><strong>Caso de Uso Práctico</strong></td>
+                    <td>15</td>
+                    <td>Implementación innovadora, impacto medible (reducción %)</td>
+                </tr>
+                <tr>
+                    <td><strong>Reporte Técnico</strong></td>
+                    <td>15</td>
+                    <td>Visuales claras, tablas numéricas, insights accionables</td>
+                </tr>
+                <tr>
+                    <td><strong>Tests y Calidad</strong></td>
+                    <td>10</td>
+                    <td>Tests exhaustivos, código limpio PEP8, documentado</td>
+                </tr>
+                <tr>
+                    <td><strong>Bonus: Demo Interactivo</strong></td>
+                    <td>+10</td>
+                    <td>App funcional, UI intuitiva, datos en tiempo real simulado</td>
+                </tr>
+            </table>
+
+            <div class="concepts" style="margin-top: 20px;">
+                <p><strong>🎓 Conexión Pedagógica:</strong> Este avance extiende la exploración (Semana 5) a optimización ponderada, preparando para:</p>
+                <ul>
+                    <li><strong>Semana 7:</strong> Bellman-Ford (negativos), A* (heurísticas)</li>
+                    <li><strong>Semana 8:</strong> Árboles MST (Prim/Kruskal) para infra</li>
+                    <li><strong>Semana 9+:</strong> Flujos, matching, aproximaciones NP</li>
+                </ul>
+                <p>Enfócate en trade-offs: ¿cuándo precomputar (FW) vs computar on-demand (Dijkstra)? Es clave en sistemas reales.</p>
+            </div>
+
+            <p style="text-align: center; margin-top: 30px; font-size: 1.1em;">
+                <a href="#intro" style="margin: 0 15px;">✓ Marcar Semana 6 como Completada</a> | 
+                <a href="#intro" style="margin: 0 15px;">🔄 Volver al Inicio</a>
+            </p>
+        </section>
+
+        <footer>
+            <p><strong>Estructuras de Datos Avanzadas - Semana 6</strong></p>
+            <p><em>Algoritmos de Optimización en Grafos Ponderados © 2025</em></p>
+            <p style="font-size: 0.9em; margin-top: 10px;">
+                "Dijkstra y Floyd-Warshall no solo calculan distancias; optimizan el flujo del mundo moderno, desde paquetes de datos hasta entregas globales."
+            </p>
+            <p>Dr Eligardo Cruz Sánchez |  Universidad Autónoma de Nayarit</p>
+        </footer>
+
+    </div>
+</body>
+</html>

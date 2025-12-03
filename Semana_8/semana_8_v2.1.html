@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌲 Semana 8 – Estructuras de Datos Arbóreas Especializadas</title>
+    <style>
+        /* Reset y configuración base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Tipografía */
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #8e44ad;
+            padding-bottom: 10px;
+            margin: 40px 0 20px 0;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 8px;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: #8e44ad;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Navegación */
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        nav li {
+            margin: 5px 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #8e44ad;
+        }
+
+        /* Cajas didácticas */
+        .engage {
+            background: #e3f2fd;
+            padding: 20px;
+            border-left: 5px solid #2196f3;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .objectives {
+            background: #f3e5f5;
+            padding: 20px;
+            border-left: 5px solid #9b59b6;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .concepts {
+            background: #fff3cd;
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .visualization {
+            background: #f0f4c3;
+            padding: 20px;
+            border-left: 5px solid #cddc39;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .comparison {
+            background: #fef5e7;
+            padding: 20px;
+            border-left: 5px solid #f39c12;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .application {
+            background: #ebf5fb;
+            padding: 20px;
+            border-left: 5px solid #5dade2;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background: #fbe9e7;
+            padding: 20px;
+            border-left: 5px solid #ff5722;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .gamification {
+            background: #f3e5f5;
+            padding: 20px;
+            border-left: 5px solid #9c27b0;
+            border-radius: 5px;
+            margin: 20px 0;
+            border: 2px dashed #9c27b0;
+        }
+
+        .checkpoint {
+            background: #fffbea;
+            padding: 25px;
+            border: 3px dashed #f39c12;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .project {
+            background: #d1ecf1;
+            padding: 20px;
+            border-left: 5px solid #17a2b8;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .ia-activity {
+            background: #e7d4f7;
+            padding: 20px;
+            border-left: 5px solid #9b59b6;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .checklist {
+            background: #d4edda;
+            padding: 20px;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .math-def {
+            background: #fafafa;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: "Times New Roman", serif;
+            font-size: 1.05em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .algorithm-box {
+            background: #e8eaf6;
+            padding: 20px;
+            border-left: 5px solid #3f51b5;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .design-note {
+            background: #e0f2f1;
+            padding: 15px;
+            border-left: 5px solid #009688;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .pedagogical-note {
+            background: #fff8e1;
+            padding: 15px;
+            border: 2px solid #ffb300;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .connection-box {
+            background: #e1f5fe;
+            padding: 15px;
+            border-left: 5px solid #03a9f4;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #8e44ad;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Código */
+        .code-container {
+            position: relative;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #9b59b6;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .copy-button:hover {
+            background: #8e44ad;
+        }
+
+        .copy-button.copied {
+            background: #3498db;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+        }
+
+        /* IA prompts */
+        .prompt-number {
+            background: #9b59b6;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        .ia-prompt {
+            background: #f8f9fa;
+            padding: 15px;
+            border: 2px dashed #9b59b6;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+        }
+
+        /* Botón enlace */
+        .btn-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .btn-link:hover {
+            background: #8e44ad;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+
+        /* Rotaciones y animaciones para árboles */
+        .rotation-diagram {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .rotation-step {
+            text-align: center;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #8e44ad;
+        }
+
+        details {
+            margin: 10px 0;
+        }
+
+        details summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #8e44ad;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        details summary:hover {
+            background: #ede7f6;
+        }
+
+        details[open] summary {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+</head>
+<body>
+<div class="container">
+    <h1>🌲 Semana 8 – Estructuras de Datos Arbóreas Especializadas</h1>
+    <p><em>Estructuras de Datos Avanzadas © 2025 | Unidad III. Árboles y Estructuras Jerárquicas</em></p>
+
+    <div class="pedagogical-note">
+        <strong>📚 Nota de estudio:</strong> Esta semana cubre conceptos densos. Se recomienda:
+        <ul>
+            <li><strong>Día 1-2:</strong> BST completo (inserción, búsqueda, eliminación) + recorridos</li>
+            <li><strong>Día 3-4:</strong> Problema del desbalance + AVL (teoría y rotaciones simples)</li>
+            <li><strong>Día 5:</strong> AVL rotaciones dobles + práctica con simulador</li>
+            <li><strong>Día 6-7:</strong> B+ y Huffman (enfoque conceptual, implementación opcional)</li>
+        </ul>
+        <em>Los temas de B+ y Huffman son aplicaciones avanzadas; enfócate primero en dominar BST y AVL.</em>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#intro">Introducción</a></li>
+            <li><a href="#bst">3.3.1 BST</a></li>
+            <li><a href="#recorridos">3.3.2 Recorridos</a></li>
+            <li><a href="#desbalance">3.3.3 Desbalance</a></li>
+            <li><a href="#avl">3.3.4 AVL</a></li>
+            <li><a href="#bplus">3.3.5 Árboles B+</a></li>
+            <li><a href="#huffman">3.3.6 Huffman</a></li>
+            <li><a href="#errores">Errores comunes</a></li>
+            <li><a href="#codigo">Código Python</a></li>
+            <li><a href="#ia-activities">Actividades con IA</a></li>
+            <li><a href="#proyecto">Proyecto</a></li>
+            <li><a href="#reto">Reto gamificado</a></li>
+        </ul>
+    </nav>
+
+    <!-- INTRO / ENGANCHE -->
+    <section id="intro">
+        <div class="engage">
+            <h3>⚡ Actividad Rápida (3 min)</h3>
+            <p><strong>Imagina un diccionario con 1 millón de palabras.</strong> Si las guardas en una lista y buscas "zorro", tendrías que revisar ¿cuántas palabras en promedio? ¿Y si las organizas como un árbol de búsqueda balanceado?</p>
+            <details>
+                <summary>👉 Ver respuesta</summary>
+                <p><strong>Lista desordenada:</strong> En promedio 500,000 comparaciones (O(n)).</p>
+                <p><strong>Lista ordenada con búsqueda binaria:</strong> Aproximadamente 20 comparaciones (O(log n)).</p>
+                <p><strong>Árbol balanceado:</strong> También ~20 comparaciones, pero además permite inserciones y eliminaciones eficientes sin reordenar todo.</p>
+                <p>Esta es la magia de los <strong>árboles de búsqueda balanceados</strong>: mantienen O(log n) incluso con operaciones dinámicas.</p>
+            </details>
+        </div>
+
+        <h2>🎯 Objetivos de la Semana</h2>
+        <div class="objectives">
+            <ul>
+                <li>Dominar los <strong>árboles binarios de búsqueda (BST)</strong> y sus operaciones fundamentales (insertar, buscar, <strong>eliminar</strong>).</li>
+                <li>Aplicar las <strong>técnicas de recorrido</strong> (inorden, preorden, postorden) y comprender su relación con notaciones de expresiones.</li>
+                <li>Comprender el <strong>problema del desbalance</strong> y su impacto en el rendimiento.</li>
+                <li>Implementar <strong>árboles AVL</strong> con rotaciones para balanceo automático.</li>
+                <li>Conocer los <strong>árboles B+</strong> y su aplicación en bases de datos e indexación.</li>
+                <li>Construir <strong>árboles de Huffman</strong> para compresión de datos.</li>
+                <li>Usar <strong>IA generativa de forma crítica</strong>, validando sus respuestas.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 3.3.1 BST -->
+    <section id="bst">
+        <h2>🔍 3.3.1 Árboles Binarios de Búsqueda: Fundamentos y Operaciones</h2>
+        
+        <div class="math-def">
+            <strong>Propiedad BST (Invariante)</strong><br>
+            Para todo nodo N: todos los valores en su subárbol izquierdo son &lt; N.valor &lt; todos los valores en su subárbol derecho
+        </div>
+
+        <div class="concepts">
+            <h3>¿Qué es un BST?</h3>
+            <ul>
+                <li>Árbol binario donde cada nodo tiene a lo más <strong>dos hijos</strong>.</li>
+                <li>La <strong>propiedad de ordenamiento</strong> permite búsquedas eficientes.</li>
+                <li>Un recorrido <strong>inorden</strong> produce los elementos ordenados.</li>
+                <li>Base para estructuras más avanzadas (AVL, Rojo-Negro, Splay).</li>
+            </ul>
+        </div>
+
+        <div class="design-note">
+            <strong>🔧 Decisión de diseño: Manejo de duplicados</strong><br>
+            En esta implementación, <strong>no permitimos duplicados</strong> (el BST actúa como un conjunto). En aplicaciones reales existen alternativas:
+            <ul>
+                <li><strong>Contador en el nodo:</strong> Cada nodo almacena cuántas veces aparece el valor.</li>
+                <li><strong>Inserción sistemática:</strong> Los duplicados siempre van a la izquierda (o derecha).</li>
+                <li><strong>Lista en el nodo:</strong> Cada nodo contiene una lista de elementos con la misma clave.</li>
+            </ul>
+            La elección depende del caso de uso. Nuestra implementación es adecuada para índices únicos.
+        </div>
+
+        <div class="visualization">
+            <h3>🎨 Ejemplo de BST</h3>
+            <div class="mermaid" data-alt="Árbol binario de búsqueda">
+            graph TD
+                50((50)) --> 30((30))
+                50 --> 70((70))
+                30 --> 20((20))
+                30 --> 40((40))
+                70 --> 60((60))
+                70 --> 80((80))
+                
+                style 50 fill:#9b59b6,stroke:#8e44ad,stroke-width:3px,color:#fff
+                style 30 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
+                style 70 fill:#3498db,stroke:#2980b9,stroke-width:2px,color:#fff
+            </div>
+            <p><em>Observa: 30 &lt; 50 (izquierda), 70 &gt; 50 (derecha). El patrón se repite recursivamente.</em></p>
+        </div>
+
+        <div class="concepts">
+            <h3>Operaciones fundamentales</h3>
+            <table>
+                <tr>
+                    <th>Operación</th>
+                    <th>Descripción</th>
+                    <th>Complejidad (promedio)</th>
+                    <th>Complejidad (peor caso)</th>
+                </tr>
+                <tr>
+                    <td><strong>Búsqueda</strong></td>
+                    <td>Localizar un valor en el árbol</td>
+                    <td>O(log n)</td>
+                    <td>O(n) - árbol degenerado</td>
+                </tr>
+                <tr>
+                    <td><strong>Inserción</strong></td>
+                    <td>Agregar un nuevo nodo manteniendo la propiedad BST</td>
+                    <td>O(log n)</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td><strong>Eliminación</strong></td>
+                    <td>Remover un nodo preservando la estructura</td>
+                    <td>O(log n)</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td><strong>Mínimo/Máximo</strong></td>
+                    <td>Encontrar extremos (ir siempre izq/der)</td>
+                    <td>O(log n)</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sucesor/Predecesor</strong></td>
+                    <td>Siguiente/anterior elemento en orden</td>
+                    <td>O(log n)</td>
+                    <td>O(n)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="algorithm-box">
+            <h3>📋 Algoritmo de Inserción en BST</h3>
+            <ol>
+                <li>Si el árbol está vacío, crear nodo raíz con el valor.</li>
+                <li>Si valor &lt; nodo actual, ir al subárbol izquierdo.</li>
+                <li>Si valor &gt; nodo actual, ir al subárbol derecho.</li>
+                <li>Repetir hasta encontrar una posición vacía.</li>
+                <li>Insertar el nuevo nodo en esa posición.</li>
+            </ol>
+        </div>
+
+        <div class="algorithm-box">
+            <h3>📋 Algoritmo de Eliminación en BST (3 casos)</h3>
+            <p><strong>Esta es la operación más compleja del BST.</strong> Debemos considerar tres casos:</p>
+            <table>
+                <tr>
+                    <th>Caso</th>
+                    <th>Situación</th>
+                    <th>Acción</th>
+                    <th>Visualización</th>
+                </tr>
+                <tr>
+                    <td><strong>1. Hoja</strong></td>
+                    <td>Nodo sin hijos</td>
+                    <td>Simplemente eliminarlo (desconectar del padre)</td>
+                    <td>✂️ Cortar enlace</td>
+                </tr>
+                <tr>
+                    <td><strong>2. Un hijo</strong></td>
+                    <td>Nodo con exactamente un hijo</td>
+                    <td>Reemplazar el nodo con su único hijo (bypass)</td>
+                    <td>🔗 Reconectar padre con nieto</td>
+                </tr>
+                <tr>
+                    <td><strong>3. Dos hijos</strong></td>
+                    <td>Nodo con ambos hijos</td>
+                    <td>
+                        <ol>
+                            <li>Encontrar el <strong>sucesor inorden</strong> (mínimo del subárbol derecho)</li>
+                            <li>Copiar el valor del sucesor al nodo a eliminar</li>
+                            <li>Eliminar el sucesor (que será caso 1 o 2)</li>
+                        </ol>
+                    </td>
+                    <td>🔄 Sustituir y eliminar sucesor</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="visualization">
+            <h3>🎬 Ejemplo de eliminación (Caso 3: dos hijos)</h3>
+            <p>Eliminar el nodo <strong>50</strong> del siguiente árbol:</p>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+                <div class="rotation-step">
+                    <p><strong>Antes</strong></p>
+                    <div class="mermaid" data-alt="Antes de eliminar">
+                    graph TD
+                        E50((50)) --> E30((30))
+                        E50 --> E70((70))
+                        E30 --> E20((20))
+                        E30 --> E40((40))
+                        E70 --> E60((60))
+                        E70 --> E80((80))
+                        
+                        style E50 fill:#e74c3c,stroke:#c0392b,stroke-width:3px,color:#fff
+                        style E60 fill:#f39c12,stroke:#d68910,stroke-width:2px,color:#fff
+                    </div>
+                    <p><em>50 tiene dos hijos.<br>Sucesor inorden: 60</em></p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="rotation-step">
+                    <p><strong>Después</strong></p>
+                    <div class="mermaid" data-alt="Después de eliminar">
+                    graph TD
+                        F60((60)) --> F30((30))
+                        F60 --> F70((70))
+                        F30 --> F20((20))
+                        F30 --> F40((40))
+                        F70 --> F80((80))
+                        
+                        style F60 fill:#27ae60,stroke:#1e8449,stroke-width:3px,color:#fff
+                    </div>
+                    <p><em>60 reemplaza a 50.<br>El 60 original se elimina (era hoja).</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkpoint">
+            <h3>⏸️ Checkpoint conceptual</h3>
+            <ol>
+                <li>¿Por qué un recorrido inorden de un BST produce una secuencia ordenada?</li>
+                <li>Si insertas [50, 30, 70, 20, 40] en un BST vacío, dibuja el árbol resultante.</li>
+                <li>¿Qué pasa si insertas elementos ya ordenados [10, 20, 30, 40, 50]?</li>
+            </ol>
+            <details>
+                <summary>💡 Ver respuestas sugeridas</summary>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                    <p><strong>1.</strong> Porque inorden visita: izquierda → nodo → derecha. En un BST, todos los valores de la izquierda son menores que el nodo, y todos los de la derecha son mayores. Al visitar en ese orden, se procesan de menor a mayor.</p>
+                    <p><strong>2.</strong> El árbol resultante:</p>
+                    <pre>
+        50
+       /  \
+      30   70
+     /  \
+    20  40</pre>
+                    <p><strong>3.</strong> Se forma un árbol degenerado (lista enlazada hacia la derecha). Cada nuevo elemento es mayor que todos los anteriores, así que siempre va a la derecha. Altura = n-1, rendimiento O(n).</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- 3.3.2 RECORRIDOS -->
+    <section id="recorridos">
+        <h2>🚶 3.3.2 Técnicas de Recorrido y Procesamiento de Expresiones</h2>
+
+        <div class="concepts">
+            <h3>Los tres recorridos clásicos (DFS)</h3>
+            <table>
+                <tr>
+                    <th>Recorrido</th>
+                    <th>Orden de visita</th>
+                    <th>Aplicación principal</th>
+                    <th>Mnemotécnico</th>
+                </tr>
+                <tr>
+                    <td><strong>Inorden (LNR)</strong></td>
+                    <td>Izquierda → Nodo → Derecha</td>
+                    <td>Obtener elementos ordenados en BST</td>
+                    <td>"El nodo en medio"</td>
+                </tr>
+                <tr>
+                    <td><strong>Preorden (NLR)</strong></td>
+                    <td>Nodo → Izquierda → Derecha</td>
+                    <td>Copiar/serializar árbol, notación prefija</td>
+                    <td>"Nodo primero"</td>
+                </tr>
+                <tr>
+                    <td><strong>Postorden (LRN)</strong></td>
+                    <td>Izquierda → Derecha → Nodo</td>
+                    <td>Eliminar árbol, notación postfija (RPN)</td>
+                    <td>"Nodo al final"</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="visualization">
+            <h3>🎬 Ejemplo de los tres recorridos</h3>
+            <div class="mermaid" data-alt="Árbol de expresión">
+            graph TD
+                MULT((*)) --> PLUS((+))
+                MULT --> C((C))
+                PLUS --> A((A))
+                PLUS --> B((B))
+                
+                style MULT fill:#e74c3c,stroke:#c0392b,stroke-width:3px,color:#fff
+                style PLUS fill:#f39c12,stroke:#d68910,stroke-width:2px,color:#fff
+            </div>
+            <p>Árbol que representa la expresión <strong>(A + B) * C</strong></p>
+            <table>
+                <tr>
+                    <th>Recorrido</th>
+                    <th>Resultado</th>
+                    <th>Interpretación</th>
+                </tr>
+                <tr>
+                    <td>Inorden</td>
+                    <td>A + B * C</td>
+                    <td>Notación infija (necesita paréntesis para claridad)</td>
+                </tr>
+                <tr>
+                    <td>Preorden</td>
+                    <td>* + A B C</td>
+                    <td>Notación prefija (polaca) - no necesita paréntesis</td>
+                </tr>
+                <tr>
+                    <td>Postorden</td>
+                    <td>A B + C *</td>
+                    <td>Notación postfija (RPN) - ideal para evaluación con pila</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="connection-box">
+            <h3>🔗 Conexión clave: Árbol → Recorrido → Pila</h3>
+            <p><strong>El recorrido postorden de un árbol de expresión genera exactamente la notación polaca inversa (RPN)</strong>, la cual puede ser evaluada linealmente usando una pila.</p>
+            <p>Es decir:</p>
+            <ol>
+                <li>Un <strong>árbol de expresión</strong> representa la estructura jerárquica de una fórmula.</li>
+                <li>El <strong>recorrido postorden</strong> produce una secuencia lineal (RPN).</li>
+                <li>Un <strong>algoritmo con pila</strong> evalúa esa secuencia eficientemente.</li>
+            </ol>
+            <p><em>Esta es la razón por la que las calculadoras HP usan RPN: es más fácil de procesar computacionalmente.</em></p>
+        </div>
+
+        <div class="application">
+            <h3>💡 Aplicación: Evaluación de expresiones con pila</h3>
+            <p>La notación postfija permite evaluar expresiones sin paréntesis usando una pila:</p>
+            <ol>
+                <li>Lee tokens de izquierda a derecha.</li>
+                <li>Si es operando: push a la pila.</li>
+                <li>Si es operador: pop dos operandos, aplica operador, push resultado.</li>
+                <li>Al final, el resultado está en el tope de la pila.</li>
+            </ol>
+            <p><strong>Ejemplo:</strong> Evaluar <code>3 4 + 2 *</code></p>
+            <table>
+                <tr>
+                    <th>Token</th>
+                    <th>Acción</th>
+                    <th>Pila</th>
+                </tr>
+                <tr><td>3</td><td>push</td><td>[3]</td></tr>
+                <tr><td>4</td><td>push</td><td>[3, 4]</td></tr>
+                <tr><td>+</td><td>pop 4, pop 3, push 3+4=7</td><td>[7]</td></tr>
+                <tr><td>2</td><td>push</td><td>[7, 2]</td></tr>
+                <tr><td>*</td><td>pop 2, pop 7, push 7*2=14</td><td>[14]</td></tr>
+            </table>
+            <p><strong>Resultado: 14</strong></p>
+        </div>
+
+        <div class="concepts">
+            <h3>Recorrido por niveles (BFS)</h3>
+            <p>Además de los recorridos DFS (profundidad), existe el recorrido por <strong>niveles</strong> o <strong>amplitud</strong>:</p>
+            <ul>
+                <li>Usa una <strong>cola</strong> en lugar de recursión/pila.</li>
+                <li>Visita todos los nodos del nivel k antes de pasar al nivel k+1.</li>
+                <li>Útil para: encontrar profundidad, imprimir árbol por niveles, encontrar camino más corto.</li>
+            </ul>
+        </div>
+
+        <div class="checkpoint">
+            <h3>⏸️ Checkpoint conceptual</h3>
+            <ol>
+                <li>Si tienes la expresión <code>(2 + 3) * (4 - 1)</code>, ¿cuál es su forma postfija?</li>
+                <li>¿Qué recorrido usarías para hacer una copia exacta de un árbol?</li>
+                <li>En un árbol de expresión, ¿dónde están los operandos y dónde los operadores?</li>
+            </ol>
+            <details>
+                <summary>💡 Ver respuestas sugeridas</summary>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                    <p><strong>1.</strong> <code>2 3 + 4 1 - *</code>. Primero se evalúa 2+3=5, luego 4-1=3, finalmente 5*3=15.</p>
+                    <p><strong>2.</strong> Preorden (NLR). Al procesar el nodo antes que sus hijos, puedes crear el nodo copia y luego recursivamente copiar sus subárboles.</p>
+                    <p><strong>3.</strong> Los operandos siempre son hojas (no tienen hijos). Los operadores son nodos internos (tienen al menos un hijo, usualmente dos para operadores binarios).</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- 3.3.3 DESBALANCE -->
+    <section id="desbalance">
+        <h2>⚠️ 3.3.3 Problema del Desbalance y Necesidad de Equilibrio</h2>
+
+        <div class="warning">
+            <h3>El enemigo silencioso: el árbol degenerado</h3>
+            <p>Si insertas elementos ordenados en un BST, obtienes una <strong>lista enlazada</strong> disfrazada de árbol. Todas las operaciones pasan de O(log n) a O(n).</p>
+        </div>
+
+        <div class="visualization">
+            <h3>Comparación visual: balanceado vs degenerado</h3>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                <div>
+                    <h4>BST Balanceado (inserción: 50, 25, 75, 10, 30)</h4>
+                    <div class="mermaid" data-alt="Árbol balanceado">
+                    graph TD
+                        A50((50)) --> A25((25))
+                        A50 --> A75((75))
+                        A25 --> A10((10))
+                        A25 --> A30((30))
+                        
+                        style A50 fill:#27ae60,stroke:#1e8449,stroke-width:3px,color:#fff
+                    </div>
+                    <p style="text-align:center;"><strong>Altura: 2</strong> → O(log n)</p>
+                </div>
+                <div>
+                    <h4>BST Degenerado (inserción: 10, 20, 30, 40, 50)</h4>
+                    <div class="mermaid" data-alt="Árbol degenerado">
+                    graph TD
+                        B10((10)) --> B20((20))
+                        B20 --> B30((30))
+                        B30 --> B40((40))
+                        B40 --> B50((50))
+                        
+                        style B10 fill:#e74c3c,stroke:#c0392b,stroke-width:3px,color:#fff
+                    </div>
+                    <p style="text-align:center;"><strong>Altura: 4</strong> → O(n)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="math-def">
+            <strong>Factor de Balance (FB)</strong><br>
+            FB(nodo) = altura(subárbol izquierdo) − altura(subárbol derecho)<br>
+            Árbol balanceado: |FB| ≤ 1 para todos los nodos
+        </div>
+
+        <div class="concepts">
+            <h3>Impacto del desbalance en el rendimiento</h3>
+            <table>
+                <tr>
+                    <th>Escenario</th>
+                    <th>Altura del árbol</th>
+                    <th>Búsqueda (n = 1,000,000)</th>
+                </tr>
+                <tr>
+                    <td>BST perfectamente balanceado</td>
+                    <td>⌊log₂ n⌋ ≈ 20</td>
+                    <td>~20 comparaciones</td>
+                </tr>
+                <tr>
+                    <td>BST AVL (casi balanceado)</td>
+                    <td>≤ 1.44 log₂ n ≈ 29</td>
+                    <td>~29 comparaciones</td>
+                </tr>
+                <tr>
+                    <td>BST degenerado (lista)</td>
+                    <td>n - 1 = 999,999</td>
+                    <td>~500,000 comparaciones promedio</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="concepts">
+            <h3>Soluciones al problema del desbalance</h3>
+            <table>
+                <tr>
+                    <th>Estrategia</th>
+                    <th>Estructura</th>
+                    <th>Garantía</th>
+                </tr>
+                <tr>
+                    <td>Balanceo estricto por altura</td>
+                    <td><strong>Árboles AVL</strong></td>
+                    <td>|FB| ≤ 1, altura ≤ 1.44 log n</td>
+                </tr>
+                <tr>
+                    <td>Balanceo por color (menos rotaciones)</td>
+                    <td><strong>Árboles Rojo-Negro</strong></td>
+                    <td>altura ≤ 2 log n</td>
+                </tr>
+                <tr>
+                    <td>Auto-ajuste por acceso</td>
+                    <td><strong>Árboles Splay</strong></td>
+                    <td>O(log n) amortizado</td>
+                </tr>
+                <tr>
+                    <td>Aleatorización</td>
+                    <td><strong>Treaps</strong></td>
+                    <td>O(log n) esperado</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="checkpoint">
+            <h3>⏸️ Checkpoint conceptual</h3>
+            <ol>
+                <li>¿Por qué la inserción ordenada causa el peor caso en un BST?</li>
+                <li>Calcula el factor de balance de cada nodo en un árbol con raíz 50, hijo izquierdo 30, hijo derecho 70.</li>
+                <li>¿Qué ventaja tiene un árbol Rojo-Negro sobre un AVL? ¿Y viceversa?</li>
+            </ol>
+            <details>
+                <summary>💡 Ver respuestas sugeridas</summary>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                    <p><strong>1.</strong> Porque cada nuevo elemento es mayor (o menor) que todos los anteriores, siempre va al mismo lado (derecha o izquierda), creando una cadena lineal.</p>
+                    <p><strong>2.</strong> FB(50) = altura(30) - altura(70) = 1 - 1 = 0. FB(30) = 0 - 0 = 0. FB(70) = 0 - 0 = 0. Todos balanceados.</p>
+                    <p><strong>3.</strong> Rojo-Negro: menos rotaciones en promedio (mejor para muchas inserciones/eliminaciones). AVL: más estrictamente balanceado (mejor para muchas búsquedas). En la práctica, Rojo-Negro es más común en bibliotecas estándar (std::map en C++, TreeMap en Java).</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- 3.3.4 AVL -->
+    <section id="avl">
+        <h2>⚖️ 3.3.4 Árboles AVL: Balanceo Automático</h2>
+
+        <div class="concepts">
+            <h3>¿Qué es un árbol AVL?</h3>
+            <p>Nombrado por sus inventores <strong>A</strong>delson-<strong>V</strong>elsky y <strong>L</strong>andis (1962), es un BST que mantiene automáticamente el balance mediante <strong>rotaciones</strong>.</p>
+            <ul>
+                <li>Invariante: Para cada nodo, |FB| ≤ 1.</li>
+                <li>Garantiza altura O(log n).</li>
+                <li>Cada inserción o eliminación puede requerir rotaciones para restaurar el balance.</li>
+            </ul>
+        </div>
+
+        <div class="math-def">
+            <strong>Altura máxima de un AVL</strong><br>
+            h(n) ≤ 1.44 · log₂(n + 2) − 0.328<br>
+            Para n = 1,000,000: h ≤ 29 (vs 20 para árbol perfecto, vs 999,999 para degenerado)
+        </div>
+
+        <div class="algorithm-box">
+            <h3>📋 Las 4 rotaciones del AVL</h3>
+            <p>Cuando |FB| > 1, se aplica una rotación según el patrón de desbalance:</p>
+            <table>
+                <tr>
+                    <th>Caso</th>
+                    <th>Patrón</th>
+                    <th>FB del nodo</th>
+                    <th>FB del hijo</th>
+                    <th>Rotación</th>
+                </tr>
+                <tr>
+                    <td><strong>LL</strong></td>
+                    <td>Inserción en subárbol izquierdo del hijo izquierdo</td>
+                    <td>+2</td>
+                    <td>+1 o 0</td>
+                    <td>Rotación simple derecha</td>
+                </tr>
+                <tr>
+                    <td><strong>RR</strong></td>
+                    <td>Inserción en subárbol derecho del hijo derecho</td>
+                    <td>-2</td>
+                    <td>-1 o 0</td>
+                    <td>Rotación simple izquierda</td>
+                </tr>
+                <tr>
+                    <td><strong>LR</strong></td>
+                    <td>Inserción en subárbol derecho del hijo izquierdo</td>
+                    <td>+2</td>
+                    <td>-1</td>
+                    <td>Rotación doble: izquierda + derecha</td>
+                </tr>
+                <tr>
+                    <td><strong>RL</strong></td>
+                    <td>Inserción en subárbol izquierdo del hijo derecho</td>
+                    <td>-2</td>
+                    <td>+1</td>
+                    <td>Rotación doble: derecha + izquierda</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="visualization">
+            <h3>🎬 Rotación simple a la derecha (caso LL)</h3>
+            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 30px;">
+                <div class="rotation-step">
+                    <p><strong>Antes (desbalanceado)</strong></p>
+                    <div class="mermaid" data-alt="Antes de rotación">
+                    graph TD
+                        Z((Z<br>FB=+2)) --> Y((Y<br>FB=+1))
+                        Z --> T4[T4]
+                        Y --> X((X))
+                        Y --> T3[T3]
+                        X --> T1[T1]
+                        X --> T2[T2]
+                        
+                        style Z fill:#e74c3c,stroke:#c0392b,color:#fff
+                        style Y fill:#f39c12,stroke:#d68910,color:#fff
+                    </div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="rotation-step">
+                    <p><strong>Después (balanceado)</strong></p>
+                    <div class="mermaid" data-alt="Después de rotación">
+                    graph TD
+                        Y2((Y<br>FB=0)) --> X2((X))
+                        Y2 --> Z2((Z<br>FB=0))
+                        X2 --> T1b[T1]
+                        X2 --> T2b[T2]
+                        Z2 --> T3b[T3]
+                        Z2 --> T4b[T4]
+                        
+                        style Y2 fill:#27ae60,stroke:#1e8449,color:#fff
+                        style Z2 fill:#27ae60,stroke:#1e8449,color:#fff
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center;"><em>Y "sube" a la raíz, Z "baja" a la derecha, T3 cambia de padre (de Y a Z)</em></p>
+        </div>
+
+        <div class="visualization">
+            <h3>🎬 Rotación doble LR (en 3 pasos)</h3>
+            <p>La rotación doble se entiende mejor como <strong>dos rotaciones simples consecutivas</strong>:</p>
+            <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div class="rotation-step">
+                    <p><strong>1. Estado inicial</strong></p>
+                    <div class="mermaid" data-alt="Estado inicial LR">
+                    graph TD
+                        Z1((Z<br>FB=+2)) --> Y1((Y<br>FB=-1))
+                        Z1 --> T4a[T4]
+                        Y1 --> T1a[T1]
+                        Y1 --> X1((X))
+                        X1 --> T2a[T2]
+                        X1 --> T3a[T3]
+                        
+                        style Z1 fill:#e74c3c,color:#fff
+                        style Y1 fill:#f39c12,color:#fff
+                        style X1 fill:#3498db,color:#fff
+                    </div>
+                    <p><em>Z tiene FB=+2<br>pero Y tiene FB=-1 (caso LR)</em></p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="rotation-step">
+                    <p><strong>2. Rotación izquierda en Y</strong></p>
+                    <div class="mermaid" data-alt="Después de rotación izquierda">
+                    graph TD
+                        Z2((Z<br>FB=+2)) --> X2((X))
+                        Z2 --> T4b[T4]
+                        X2 --> Y2((Y))
+                        X2 --> T3b[T3]
+                        Y2 --> T1b[T1]
+                        Y2 --> T2b[T2]
+                        
+                        style Z2 fill:#e74c3c,color:#fff
+                        style X2 fill:#3498db,color:#fff
+                    </div>
+                    <p><em>Ahora es caso LL puro<br>(FB de hijo es +1)</em></p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="rotation-step">
+                    <p><strong>3. Rotación derecha en Z</strong></p>
+                    <div class="mermaid" data-alt="Estado final balanceado">
+                    graph TD
+                        X3((X<br>FB=0)) --> Y3((Y))
+                        X3 --> Z3((Z))
+                        Y3 --> T1c[T1]
+                        Y3 --> T2c[T2]
+                        Z3 --> T3c[T3]
+                        Z3 --> T4c[T4]
+                        
+                        style X3 fill:#27ae60,color:#fff
+                        style Y3 fill:#27ae60,color:#fff
+                        style Z3 fill:#27ae60,color:#fff
+                    </div>
+                    <p><em>¡Balanceado!<br>X es la nueva raíz</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="concepts">
+            <h3>Complejidad de operaciones AVL</h3>
+            <table>
+                <tr>
+                    <th>Operación</th>
+                    <th>Complejidad</th>
+                    <th>Rotaciones máximas</th>
+                </tr>
+                <tr>
+                    <td>Búsqueda</td>
+                    <td>O(log n)</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Inserción</td>
+                    <td>O(log n)</td>
+                    <td>≤ 2 (una simple o una doble)</td>
+                </tr>
+                <tr>
+                    <td>Eliminación</td>
+                    <td>O(log n)</td>
+                    <td>O(log n) en el peor caso</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="visualization">
+            <h3>🔧 Simulador interactivo recomendado</h3>
+            <p>Practica inserciones y rotaciones visualmente:</p>
+            <a href="https://www.cs.usfca.edu/~galles/visualization/AVLtree.html" target="_blank" class="btn-link">
+                👉 Simulador AVL (USFCA)
+            </a>
+            <p><em>Recomendación: Inserta la secuencia 30, 20, 10 para ver una rotación LL, luego 40, 50 para ver RR, luego 25 para ver LR.</em></p>
+        </div>
+
+        <div class="checkpoint">
+            <h3>⏸️ Checkpoint conceptual</h3>
+            <ol>
+                <li>¿Por qué después de una inserción en AVL solo se necesitan como máximo 2 rotaciones?</li>
+                <li>Si insertas [30, 20, 25] en un AVL vacío, ¿qué tipo de rotación ocurre?</li>
+                <li>¿Cuál es la diferencia entre el FB del nodo desbalanceado y el FB de su hijo para distinguir LL de LR?</li>
+            </ol>
+            <details>
+                <summary>💡 Ver respuestas sugeridas</summary>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                    <p><strong>1.</strong> Porque una inserción aumenta la altura de un subárbol en máximo 1. Una rotación (simple o doble) reduce esa altura en 1, restaurando el balance. No puede quedar otro nodo desbalanceado arriba porque el subárbol rotado ahora tiene la misma altura que antes de la inserción.</p>
+                    <p><strong>2.</strong> Rotación doble LR. Después de [30, 20]: 30 tiene hijo izquierdo 20. Al insertar 25: va a la derecha de 20 (FB de 30 = +2, FB de 20 = -1). Caso LR.</p>
+                    <p><strong>3.</strong> En LL: FB(nodo)=+2 y FB(hijo izq)=+1 o 0 (mismo signo). En LR: FB(nodo)=+2 pero FB(hijo izq)=-1 (signos opuestos). El signo opuesto indica que hay un "zigzag" que requiere doble rotación.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- 3.3.5 B+ -->
+    <section id="bplus">
+        <h2>💾 3.3.5 Árboles B+: Optimización para Almacenamiento Masivo</h2>
+
+        <div class="pedagogical-note">
+            <strong>📌 Nivel de profundidad:</strong> Esta sección es conceptual. La implementación de B+ es compleja y generalmente se deja para cursos de bases de datos. Enfócate en entender <em>por qué</em> existen y <em>cuándo</em> usarlos.
+        </div>
+
+        <div class="concepts">
+            <h3>¿Por qué no usar AVL en bases de datos?</h3>
+            <p>Los árboles binarios tienen un problema fundamental para almacenamiento en disco:</p>
+            <ul>
+                <li>Cada acceso a un nodo puede requerir un <strong>acceso a disco</strong>.</li>
+                <li>Un disco puede leer ~100-200 operaciones/segundo vs ~10⁹ en RAM.</li>
+                <li>Un AVL con 1 millón de elementos necesita ~20 accesos a disco por búsqueda.</li>
+                <li><strong>Solución:</strong> Nodos más grandes que almacenen múltiples claves → menos niveles → menos accesos a disco.</li>
+            </ul>
+        </div>
+
+        <div class="math-def">
+            <strong>Definición de Árbol B+ de orden m</strong><br>
+            • Cada nodo interno tiene entre ⌈m/2⌉ y m hijos<br>
+            • La raíz tiene entre 2 y m hijos (si no es hoja)<br>
+            • Todas las hojas están al mismo nivel<br>
+            • Las hojas contienen todos los datos y están enlazadas secuencialmente
+        </div>
+
+        <div class="visualization">
+            <h3>🎨 Estructura de un árbol B+ (orden 4)</h3>
+            <div class="mermaid" data-alt="Árbol B+ de orden 4">
+            graph TD
+                R["🔑 ÍNDICE<br>[30 | 60]"] --> N1["🔑 ÍNDICE<br>[10 | 20]"]
+                R --> N2["🔑 ÍNDICE<br>[40 | 50]"]
+                R --> N3["🔑 ÍNDICE<br>[70 | 80 | 90]"]
+                
+                N1 --> L1["📄 DATA<br>10 → reg"]
+                N1 --> L2["📄 DATA<br>20 → reg"]
+                N1 --> L3["📄 DATA<br>30 → reg"]
+                
+                N2 --> L4["📄 DATA<br>40 → reg"]
+                N2 --> L5["📄 DATA<br>50 → reg"]
+                N2 --> L6["📄 DATA<br>60 → reg"]
+                
+                N3 --> L7["📄 DATA<br>70 → reg"]
+                N3 --> L8["📄 DATA<br>80 → reg"]
+                N3 --> L9["📄 DATA<br>90 → reg"]
+                
+                L1 -.->|siguiente| L2
+                L2 -.->|siguiente| L3
+                L3 -.->|siguiente| L4
+                L4 -.->|siguiente| L5
+                L5 -.->|siguiente| L6
+                L6 -.->|siguiente| L7
+                L7 -.->|siguiente| L8
+                L8 -.->|siguiente| L9
+                
+                style R fill:#9b59b6,color:#fff
+                style N1 fill:#3498db,color:#fff
+                style N2 fill:#3498db,color:#fff
+                style N3 fill:#3498db,color:#fff
+                style L1 fill:#27ae60,color:#fff
+                style L2 fill:#27ae60,color:#fff
+                style L3 fill:#27ae60,color:#fff
+                style L4 fill:#27ae60,color:#fff
+                style L5 fill:#27ae60,color:#fff
+                style L6 fill:#27ae60,color:#fff
+                style L7 fill:#27ae60,color:#fff
+                style L8 fill:#27ae60,color:#fff
+                style L9 fill:#27ae60,color:#fff
+            </div>
+            <p><strong>Leyenda:</strong></p>
+            <ul>
+                <li>🔑 <strong>Nodos índice (azul/morado):</strong> Solo contienen claves para navegación, NO datos reales.</li>
+                <li>📄 <strong>Hojas (verde):</strong> Contienen los datos reales (o punteros a registros). Están enlazadas.</li>
+                <li>Las líneas punteadas muestran el <strong>enlace entre hojas</strong> para recorrido secuencial.</li>
+            </ul>
+            
+            <div class="design-note">
+                <strong>💡 Detalle de implementación real:</strong> En el diagrama, el salto de L3 → L4 implica cambiar de una "página" de disco a otra (L1-L3 pertenecen al bloque del nodo N1, mientras L4-L6 pertenecen al bloque de N2). Gracias al puntero "siguiente", este salto es <strong>directo</strong> (un solo acceso a disco), sin necesidad de volver a subir por los nodos índice. Esta es la gran ventaja de B+ para consultas de rango como <code>SELECT * WHERE precio BETWEEN 10 AND 50</code>.
+            </div>
+        </div>
+
+        <div class="comparison">
+            <h3>B-Tree vs B+ Tree</h3>
+            <table>
+                <tr>
+                    <th>Característica</th>
+                    <th>B-Tree</th>
+                    <th>B+ Tree</th>
+                </tr>
+                <tr>
+                    <td>Datos almacenados en</td>
+                    <td>Todos los nodos</td>
+                    <td><strong>Solo en hojas</strong></td>
+                </tr>
+                <tr>
+                    <td>Claves duplicadas</td>
+                    <td>No</td>
+                    <td>Sí (en nodos internos como guías)</td>
+                </tr>
+                <tr>
+                    <td>Hojas enlazadas</td>
+                    <td>No</td>
+                    <td><strong>Sí (lista enlazada)</strong></td>
+                </tr>
+                <tr>
+                    <td>Recorrido secuencial</td>
+                    <td>Requiere recorrido inorden</td>
+                    <td><strong>Muy eficiente (seguir punteros)</strong></td>
+                </tr>
+                <tr>
+                    <td>Uso típico</td>
+                    <td>Sistemas de archivos</td>
+                    <td><strong>Índices de bases de datos</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="application">
+            <h3>💡 Aplicaciones de Árboles B+</h3>
+            <ul>
+                <li><strong>MySQL (InnoDB):</strong> Todos los índices son árboles B+.</li>
+                <li><strong>PostgreSQL:</strong> Índices B-tree (variante de B+).</li>
+                <li><strong>SQLite:</strong> Usa B-tree para tablas e índices.</li>
+                <li><strong>Sistemas de archivos:</strong> NTFS, ext4, HFS+ usan variantes de B-tree.</li>
+            </ul>
+        </div>
+
+        <div class="concepts">
+            <h3>Cálculo de altura y accesos a disco</h3>
+            <p>Para un B+ de orden m con n claves:</p>
+            <div class="math-def">
+                altura ≤ ⌈log<sub>⌈m/2⌉</sub>(n)⌉
+            </div>
+            <table>
+                <tr>
+                    <th>Estructura</th>
+                    <th>Orden</th>
+                    <th>Claves (n)</th>
+                    <th>Altura</th>
+                    <th>Accesos a disco</th>
+                </tr>
+                <tr>
+                    <td>AVL</td>
+                    <td>2</td>
+                    <td>1,000,000</td>
+                    <td>~20</td>
+                    <td>~20</td>
+                </tr>
+                <tr>
+                    <td>B+ (orden 100)</td>
+                    <td>100</td>
+                    <td>1,000,000</td>
+                    <td>~3</td>
+                    <td><strong>~3</strong></td>
+                </tr>
+                <tr>
+                    <td>B+ (orden 500)</td>
+                    <td>500</td>
+                    <td>1,000,000</td>
+                    <td>~2</td>
+                    <td><strong>~2</strong></td>
+                </tr>
+            </table>
+            <p><em>¡Un B+ de orden 500 reduce los accesos a disco de 20 a solo 2!</em></p>
+        </div>
+
+        <div class="checkpoint">
+            <h3>⏸️ Checkpoint conceptual</h3>
+            <ol>
+                <li>¿Por qué las hojas de un B+ están enlazadas?</li>
+                <li>Si un nodo de B+ cabe en un bloque de disco de 4KB y cada clave ocupa 8 bytes, ¿cuántas claves puede tener aproximadamente?</li>
+                <li>¿Por qué un B+ es mejor que un AVL para consultas de rango (ej: "todos los productos con precio entre $10 y $50")?</li>
+            </ol>
+            <details>
+                <summary>💡 Ver respuestas sugeridas</summary>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 5px;">
+                    <p><strong>1.</strong> Para permitir recorridos secuenciales eficientes. Una vez que llegas a la primera hoja del rango, puedes seguir los punteros sin volver a subir por el árbol.</p>
+                    <p><strong>2.</strong> Aproximadamente 4096/8 ≈ 500 claves por nodo (en realidad menos porque también hay punteros, pero el orden de magnitud es correcto).</p>
+                    <p><strong>3.</strong> En AVL tendrías que hacer un recorrido inorden navegando arriba y abajo. En B+ encuentras la hoja con el primer valor del rango y luego solo sigues el enlace entre hojas hasta el final del rango. Mucho más eficiente.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- 3.3.6 HUFFMAN -->
+    <section id="huffman">
+        <h2>📦 3.3.6 Árboles de Huffman: Compresión de Datos</h2>
+
+        <div class="pedagogical-note">
+            <strong>📌 Nivel de profundidad:</strong> Huffman es un algoritmo elegante y accesible. Recomendamos implementarlo completamente como ejercicio de práctica con colas de prioridad y árboles.
+        </div>
+
+        <div class="concepts">
+            <h3>El problema de la codificación</h3>
+            <p>Si usamos códigos de longitud fija (como ASCII con 8 bits), desperdiciamos espacio en caracteres frecuentes.</p>
+            <p><strong>Idea de Huffman (1952):</strong> Asignar códigos más cortos a símbolos más frecuentes.</p>
+        </div>
+
+        <div class="math-def">
+            <strong>Propiedad del código prefijo</strong><br>
+            Ningún código es prefijo de otro → decodificación única sin delimitadores<br>
+            Ejemplo válido: {0, 10, 110, 111} | Ejemplo inválido: {0, 01, 10} (0 es prefijo de 01)
+        </div>
+
+        <div class="algorithm-box">
+            <h3>📋 Algoritmo de Huffman</h3>
+            <ol>
+                <li>Calcular la frecuencia de cada símbolo.</li>
+                <li>Crear un nodo hoja para cada símbolo con su frecuencia.</li>
+                <li>Insertar todos los nodos en una <strong>cola de prioridad</strong> (min-heap por frecuencia).</li>
+                <li><strong>Repetir</strong> mientras haya más de un nodo:
+                    <ul>
+                        <li>Extraer los dos nodos con menor frecuencia.</li>
+                        <li>Crear un nuevo nodo padre con frecuencia = suma de los dos.</li>
+                        <li>Los dos nodos extraídos se vuelven hijos del nuevo nodo.</li>
+                        <li>Insertar el nuevo nodo en la cola.</li>
+                    </ul>
+                </li>
+                <li>El nodo restante es la raíz del árbol de Huffman.</li>
+                <li>Asignar '0' a ramas izquierdas, '1' a ramas derechas.</li>
+            </ol>
+        </div>
+
+        <div class="visualization">
+            <h3>🎬 Ejemplo: Construir árbol de Huffman</h3>
+            <p>Texto: "ABRACADABRA" → Frecuencias: A=5, B=2, R=2, C=1, D=1</p>
+            
+            <details>
+                <summary>Ver construcción paso a paso</summary>
+                <table>
+                    <tr>
+                        <th>Paso</th>
+                        <th>Cola de prioridad</th>
+                        <th>Acción</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>C:1, D:1, B:2, R:2, A:5</td>
+                        <td>Inicializar</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>B:2, R:2, (CD):2, A:5</td>
+                        <td>Combinar C+D → (CD):2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>(CD):2, A:5, (BR):4</td>
+                        <td>Combinar B+R → (BR):4</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>(BR):4, (CD-A):7</td>
+                        <td>Combinar (CD)+A → 7</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Raíz:11</td>
+                        <td>Combinar (BR)+(CD-A) → Raíz</td>
+                    </tr>
+                </table>
+            </details>
+
+            <div class="mermaid" data-alt="Árbol de Huffman para ABRACADABRA">
+            graph TD
+                ROOT((11)) -->|0| BR((4))
+                ROOT -->|1| CDA((7))
+                BR -->|0| B["B:2<br>código: 00"]
+                BR -->|1| R["R:2<br>código: 01"]
+                CDA -->|0| CD((2))
+                CDA -->|1| A["A:5<br>código: 11"]
+                CD -->|0| C["C:1<br>código: 100"]
+                CD -->|1| D["D:1<br>código: 101"]
+                
+                style ROOT fill:#9b59b6,color:#fff
+                style A fill:#27ae60,color:#fff
+                style B fill:#3498db,color:#fff
+                style R fill:#3498db,color:#fff
+                style C fill:#f39c12,color:#fff
+                style D fill:#f39c12,color:#fff
+            </div>
+
+            <table>
+                <tr>
+                    <th>Símbolo</th>
+                    <th>Frecuencia</th>
+                    <th>Código Huffman</th>
+                    <th>ASCII (8 bits)</th>
+                </tr>
+                <tr><td>A</td><td>5</td><td><strong>11</strong> (2 bits)</td><td>01000001</td></tr>
+                <tr><td>B</td><td>2</td><td><strong>00</strong> (2 bits)</td><td>01000010</td></tr>
+                <tr><td>R</td><td>2</td><td><strong>01</strong> (2 bits)</td><td>01010010</td></tr>
+                <tr><td>C</td><td>1</td><td><strong>100</strong> (3 bits)</td><td>01000011</td></tr>
+                <tr><td>D</td><td>1</td><td><strong>101</strong> (3 bits)</td><td>01000100</td></tr>
+            </table>
+        </div>
+
+        <div class="concepts">
+            <h3>Cálculo del ahorro</h3>
+            <p><strong>ABRACADABRA</strong> (11 caracteres):</p>
+            <ul>
+                <li><strong>ASCII:</strong> 11 × 8 = 88 bits</li>
+                <li><strong>Huffman:</strong> 5×2 + 2×2 + 2×2 + 1×3 + 1×3 = 10 + 4 + 4 + 3 + 3 = 24 bits</li>
+                <li><strong>Compresión:</strong> (88-24)/88 = <strong>72.7% de ahorro</strong></li>
+            </ul>
+        </div>
+
+        <div class="design-note">
+            <strong>🔧 Pregunta frecuente: ¿Cómo sabe el descompresor qué árbol usar?</strong><br>
+            En la práctica, el archivo comprimido incluye:
+            <ul>
+                <li><strong>Opción 1:</strong> La tabla de frecuencias al inicio (el descompresor reconstruye el árbol).</li>
+                <li><strong>Opción 2:</strong> El árbol serializado (ej: representación canónica).</li>
+                <li><strong>Opción 3:</strong> Códigos canónicos de Huffman (solo longitudes, el árbol se deriva).</li>
+            </ul>
+            <p>Este "overhead" es pequeño comparado con el ahorro, especialmente en archivos grandes.</p>
+        </div>
+
+        <div class="application">
+            <h3>💡 Aplicaciones de Huffman</h3>
+            <ul>
+                <li><strong>ZIP, GZIP, DEFLATE:</strong> Huffman como parte del algoritmo de compresión.</li>
+                <li><strong>JPEG, PNG:</strong> Compresión de imágenes usa variantes de Huffman.</li>
+                <li><strong>MP3:</strong> Codificación Huffman para audio comprimido.</li>
+                <li><strong>Fax:</strong> Codificación de imágenes en blanco y negro.</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>⚠️ Limitaciones de Huffman</h3>
+            <ul>
+                <li>Requiere conocer las frecuencias de antemano (o dos pasadas).</li>
+                <li>El árbol debe transmitirse junto con los datos comprimidos.</li>
+                <li>No explota patrones repetitivos (mejor usar LZ77/LZ78 + Huffman).</li>
+                <li>Codificación aritmética puede ser más eficiente pero más compleja.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ERRORES COMUNES -->
+    <section id="errores">
+        <h2>⚠️ Errores frecuentes en estructuras arbóreas</h2>
+        <table>
+            <tr>
+                <th>Error típico</th>
+                <th>¿Por qué ocurre?</th>
+                <th>Corrección / prueba mental</th>
+            </tr>
+            <tr>
+                <td><strong>No actualizar alturas después de rotación AVL</strong></td>
+                <td>Se olvida que las alturas cambian al reestructurar</td>
+                <td>Siempre recalcular altura de nodos afectados de abajo hacia arriba</td>
+            </tr>
+            <tr>
+                <td><strong>Confundir casos LR y RL</strong></td>
+                <td>Los nombres son simétricos y confusos</td>
+                <td>LR: desbalance izq (+2), hijo va derecha (-1) → izq luego der</td>
+            </tr>
+            <tr>
+                <td><strong>Eliminar en BST sin considerar los 3 casos</strong></td>
+                <td>El caso de 2 hijos es el más complejo</td>
+                <td>Siempre encontrar sucesor inorden, copiar valor, eliminar sucesor</td>
+            </tr>
+            <tr>
+                <td><strong>Olvidar enlazar hojas en B+</strong></td>
+                <td>Se implementa como B-tree normal</td>
+                <td>Las hojas deben tener puntero al siguiente para recorrido secuencial</td>
+            </tr>
+            <tr>
+                <td><strong>Huffman: crear código que no es prefijo</strong></td>
+                <td>No usar estructura de árbol correctamente</td>
+                <td>Verificar: ningún código puede ser inicio de otro</td>
+            </tr>
+            <tr>
+                <td><strong>Confundir preorden con notación prefija</strong></td>
+                <td>Son lo mismo solo para árboles de expresión</td>
+                <td>Preorden es orden de visita; prefija es notación matemática</td>
+            </tr>
+        </table>
+
+        <div class="warning">
+            <h3>🤖 Cuidado con alucinaciones de IA en estructuras de datos</h3>
+            <p>Las LLMs (incluyendo ChatGPT, Claude, etc.) pueden cometer errores específicos con árboles:</p>
+            <ul>
+                <li><strong>Inventar rotaciones:</strong> Describir una "rotación triple" o secuencias que no existen.</li>
+                <li><strong>Calcular mal el factor de balance:</strong> Especialmente en ejemplos con muchos nodos.</li>
+                <li><strong>Código con bugs sutiles:</strong> Actualizar alturas en orden incorrecto, o no manejar bien los casos límite.</li>
+                <li><strong>Confundir B-tree con B+:</strong> Mezclar propiedades de ambas estructuras.</li>
+            </ul>
+            <p><strong>Regla de oro:</strong> Siempre verifica las respuestas de la IA con el simulador visual o ejecutando el código con casos de prueba propios.</p>
+        </div>
+    </section>
+
+    <!-- CÓDIGO PYTHON -->
+    <section id="codigo">
+        <h2>💻 Implementación en Python</h2>
+
+        <h3>Árbol Binario de Búsqueda (BST) - Completo con eliminación</h3>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">📋 Copiar código</button>
+            <pre><code>class NodoBST:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+class BST:
+    """
+    Árbol Binario de Búsqueda.
+    
+    Decisión de diseño: No permite duplicados (actúa como conjunto).
+    Para permitir duplicados, se podría:
+    - Agregar un contador en cada nodo
+    - Insertar duplicados sistemáticamente a la izquierda o derecha
+    """
+    
+    def __init__(self):
+        self.raiz = None
+    
+    def insertar(self, valor):
+        """Inserta un valor en el BST."""
+        if not self.raiz:
+            self.raiz = NodoBST(valor)
+        else:
+            self._insertar_recursivo(self.raiz, valor)
+    
+    def _insertar_recursivo(self, nodo, valor):
+        if valor < nodo.valor:
+            if nodo.izquierdo is None:
+                nodo.izquierdo = NodoBST(valor)
+            else:
+                self._insertar_recursivo(nodo.izquierdo, valor)
+        elif valor > nodo.valor:
+            if nodo.derecho is None:
+                nodo.derecho = NodoBST(valor)
+            else:
+                self._insertar_recursivo(nodo.derecho, valor)
+        # Si valor == nodo.valor, no insertamos (sin duplicados)
+    
+    def buscar(self, valor):
+        """Busca un valor en el BST. Retorna True si existe."""
+        return self._buscar_recursivo(self.raiz, valor)
+    
+    def _buscar_recursivo(self, nodo, valor):
+        if nodo is None:
+            return False
+        if valor == nodo.valor:
+            return True
+        elif valor < nodo.valor:
+            return self._buscar_recursivo(nodo.izquierdo, valor)
+        else:
+            return self._buscar_recursivo(nodo.derecho, valor)
+    
+    def eliminar(self, valor):
+        """
+        Elimina un valor del BST.
+        Maneja los 3 casos: hoja, un hijo, dos hijos.
+        """
+        self.raiz = self._eliminar_recursivo(self.raiz, valor)
+    
+    def _eliminar_recursivo(self, nodo, valor):
+        # Caso base: no encontramos el valor
+        if nodo is None:
+            return None
+        
+        # Buscar el nodo a eliminar
+        if valor < nodo.valor:
+            nodo.izquierdo = self._eliminar_recursivo(nodo.izquierdo, valor)
+        elif valor > nodo.valor:
+            nodo.derecho = self._eliminar_recursivo(nodo.derecho, valor)
+        else:
+            # ¡Encontramos el nodo a eliminar!
+            
+            # CASO 1: Nodo hoja (sin hijos)
+            if nodo.izquierdo is None and nodo.derecho is None:
+                return None
+            
+            # CASO 2a: Solo tiene hijo derecho
+            if nodo.izquierdo is None:
+                return nodo.derecho
+            
+            # CASO 2b: Solo tiene hijo izquierdo
+            if nodo.derecho is None:
+                return nodo.izquierdo
+            
+            # CASO 3: Tiene dos hijos
+            # Encontrar el sucesor inorden (mínimo del subárbol derecho)
+            sucesor = self._encontrar_minimo(nodo.derecho)
+            
+            # Copiar el valor del sucesor al nodo actual
+            nodo.valor = sucesor.valor
+            
+            # Eliminar el sucesor del subárbol derecho
+            nodo.derecho = self._eliminar_recursivo(nodo.derecho, sucesor.valor)
+        
+        return nodo
+    
+    def _encontrar_minimo(self, nodo):
+        """Encuentra el nodo con valor mínimo (ir siempre a la izquierda)."""
+        actual = nodo
+        while actual.izquierdo is not None:
+            actual = actual.izquierdo
+        return actual
+    
+    def inorden(self):
+        """Recorrido inorden (produce elementos ordenados)."""
+        resultado = []
+        self._inorden_recursivo(self.raiz, resultado)
+        return resultado
+    
+    def _inorden_recursivo(self, nodo, resultado):
+        if nodo:
+            self._inorden_recursivo(nodo.izquierdo, resultado)
+            resultado.append(nodo.valor)
+            self._inorden_recursivo(nodo.derecho, resultado)
+    
+    def preorden(self):
+        """Recorrido preorden."""
+        resultado = []
+        self._preorden_recursivo(self.raiz, resultado)
+        return resultado
+    
+    def _preorden_recursivo(self, nodo, resultado):
+        if nodo:
+            resultado.append(nodo.valor)
+            self._preorden_recursivo(nodo.izquierdo, resultado)
+            self._preorden_recursivo(nodo.derecho, resultado)
+    
+    def postorden(self):
+        """Recorrido postorden."""
+        resultado = []
+        self._postorden_recursivo(self.raiz, resultado)
+        return resultado
+    
+    def _postorden_recursivo(self, nodo, resultado):
+        if nodo:
+            self._postorden_recursivo(nodo.izquierdo, resultado)
+            self._postorden_recursivo(nodo.derecho, resultado)
+            resultado.append(nodo.valor)
+    
+    def minimo(self):
+        """Encuentra el valor mínimo."""
+        if not self.raiz:
+            return None
+        return self._encontrar_minimo(self.raiz).valor
+    
+    def maximo(self):
+        """Encuentra el valor máximo."""
+        if not self.raiz:
+            return None
+        nodo = self.raiz
+        while nodo.derecho:
+            nodo = nodo.derecho
+        return nodo.valor
+
+# Ejemplo de uso con pruebas de eliminación
+if __name__ == "__main__":
+    bst = BST()
+    valores = [50, 30, 70, 20, 40, 60, 80]
+    
+    print("Insertando:", valores)
+    for v in valores:
+        bst.insertar(v)
+    
+    print("Inorden:", bst.inorden())
+    
+    # Probar eliminación - Caso 1: hoja
+    print("\nEliminando 20 (hoja)...")
+    bst.eliminar(20)
+    print("Inorden:", bst.inorden())
+    
+    # Probar eliminación - Caso 2: un hijo
+    print("\nInsertando 25, eliminando 30 (un hijo)...")
+    bst.insertar(25)
+    bst.eliminar(30)
+    print("Inorden:", bst.inorden())
+    
+    # Probar eliminación - Caso 3: dos hijos
+    print("\nEliminando 50 (dos hijos, raíz)...")
+    bst.eliminar(50)
+    print("Inorden:", bst.inorden())</code></pre>
+        </div>
+
+        <h3>Árbol AVL con rotaciones</h3>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">📋 Copiar código</button>
+            <pre><code>class NodoAVL:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+        self.altura = 1  # Altura del nodo (hoja = 1)
+
+class AVL:
+    def __init__(self):
+        self.raiz = None
+    
+    def altura(self, nodo):
+        """Retorna la altura de un nodo (0 si es None)."""
+        return nodo.altura if nodo else 0
+    
+    def factor_balance(self, nodo):
+        """Calcula el factor de balance: altura(izq) - altura(der)."""
+        if not nodo:
+            return 0
+        return self.altura(nodo.izquierdo) - self.altura(nodo.derecho)
+    
+    def actualizar_altura(self, nodo):
+        """Actualiza la altura de un nodo basándose en sus hijos."""
+        nodo.altura = 1 + max(self.altura(nodo.izquierdo), 
+                              self.altura(nodo.derecho))
+    
+    def rotacion_derecha(self, z):
+        """
+        Rotación simple a la derecha (caso LL).
+              z                y
+             / \              / \
+            y   T4    →      x   z
+           / \              / \ / \
+          x   T3           T1 T2 T3 T4
+         / \
+        T1  T2
+        """
+        y = z.izquierdo
+        T3 = y.derecho
+        
+        # Realizar rotación
+        y.derecho = z
+        z.izquierdo = T3
+        
+        # Actualizar alturas (¡ORDEN IMPORTA!)
+        # Primero z, luego y. ¿Por qué?
+        # Después de la rotación, z es HIJO de y.
+        # La altura de y depende de la altura de z.
+        # Si calculáramos y primero, usaríamos la altura vieja de z (incorrecta).
+        self.actualizar_altura(z)
+        self.actualizar_altura(y)
+        
+        return y  # Nueva raíz del subárbol
+    
+    def rotacion_izquierda(self, z):
+        """
+        Rotación simple a la izquierda (caso RR).
+            z                   y
+           / \                 / \
+          T1  y       →       z   x
+             / \             / \ / \
+            T2  x           T1 T2 T3 T4
+               / \
+              T3  T4
+        """
+        y = z.derecho
+        T2 = y.izquierdo
+        
+        # Realizar rotación
+        y.izquierdo = z
+        z.derecho = T2
+        
+        # Actualizar alturas
+        self.actualizar_altura(z)
+        self.actualizar_altura(y)
+        
+        return y  # Nueva raíz del subárbol
+    
+    def insertar(self, valor):
+        """Inserta un valor y rebalancea si es necesario."""
+        self.raiz = self._insertar_recursivo(self.raiz, valor)
+    
+    def _insertar_recursivo(self, nodo, valor):
+        # 1. Inserción BST normal
+        if not nodo:
+            return NodoAVL(valor)
+        
+        if valor < nodo.valor:
+            nodo.izquierdo = self._insertar_recursivo(nodo.izquierdo, valor)
+        elif valor > nodo.valor:
+            nodo.derecho = self._insertar_recursivo(nodo.derecho, valor)
+        else:
+            return nodo  # Sin duplicados
+        
+        # 2. Actualizar altura del nodo actual
+        self.actualizar_altura(nodo)
+        
+        # 3. Obtener factor de balance
+        fb = self.factor_balance(nodo)
+        
+        # 4. Aplicar rotaciones si está desbalanceado
+        
+        # Caso LL: desbalance izquierdo-izquierdo
+        if fb > 1 and valor < nodo.izquierdo.valor:
+            return self.rotacion_derecha(nodo)
+        
+        # Caso RR: desbalance derecho-derecho
+        if fb < -1 and valor > nodo.derecho.valor:
+            return self.rotacion_izquierda(nodo)
+        
+        # Caso LR: desbalance izquierdo-derecho (rotación doble)
+        if fb > 1 and valor > nodo.izquierdo.valor:
+            nodo.izquierdo = self.rotacion_izquierda(nodo.izquierdo)
+            return self.rotacion_derecha(nodo)
+        
+        # Caso RL: desbalance derecho-izquierdo (rotación doble)
+        if fb < -1 and valor < nodo.derecho.valor:
+            nodo.derecho = self.rotacion_derecha(nodo.derecho)
+            return self.rotacion_izquierda(nodo)
+        
+        return nodo
+    
+    def inorden(self):
+        """Recorrido inorden."""
+        resultado = []
+        self._inorden(self.raiz, resultado)
+        return resultado
+    
+    def _inorden(self, nodo, resultado):
+        if nodo:
+            self._inorden(nodo.izquierdo, resultado)
+            resultado.append((nodo.valor, self.factor_balance(nodo)))
+            self._inorden(nodo.derecho, resultado)
+    
+    def mostrar_estructura(self):
+        """Muestra la estructura del árbol con factores de balance."""
+        def _mostrar(nodo, nivel=0, prefijo="Raíz: "):
+            if nodo:
+                print(" " * (nivel * 4) + prefijo + 
+                      f"{nodo.valor} (FB={self.factor_balance(nodo)}, h={nodo.altura})")
+                if nodo.izquierdo or nodo.derecho:
+                    _mostrar(nodo.izquierdo, nivel + 1, "Izq: ")
+                    _mostrar(nodo.derecho, nivel + 1, "Der: ")
+        _mostrar(self.raiz)
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    avl = AVL()
+    
+    # Insertar en orden (causaría degeneración en BST normal)
+    print("Insertando: 10, 20, 30, 40, 50, 25")
+    for valor in [10, 20, 30, 40, 50, 25]:
+        avl.insertar(valor)
+        print(f"\nDespués de insertar {valor}:")
+        avl.mostrar_estructura()
+    
+    print("\nInorden con FB:", avl.inorden())</code></pre>
+        </div>
+
+        <h3>Árbol de Huffman para compresión</h3>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">📋 Copiar código</button>
+            <pre><code>import heapq
+from collections import Counter
+
+class NodoHuffman:
+    def __init__(self, caracter, frecuencia):
+        self.caracter = caracter  # None para nodos internos
+        self.frecuencia = frecuencia
+        self.izquierdo = None
+        self.derecho = None
+    
+    def __lt__(self, otro):
+        # Para que heapq compare por frecuencia
+        return self.frecuencia < otro.frecuencia
+    
+    def es_hoja(self):
+        return self.izquierdo is None and self.derecho is None
+
+class Huffman:
+    """
+    Implementación de codificación Huffman.
+    
+    Nota sobre archivos reales: El archivo comprimido debe incluir
+    información para reconstruir el árbol. Opciones comunes:
+    1. Guardar la tabla de frecuencias al inicio
+    2. Serializar el árbol (ej: recorrido preorden con marcadores)
+    3. Usar códigos canónicos (solo guardar longitudes)
+    """
+    
+    def __init__(self):
+        self.raiz = None
+        self.codigos = {}
+        self.codigos_inversos = {}
+    
+    def construir_arbol(self, texto):
+        """Construye el árbol de Huffman a partir de un texto."""
+        # 1. Calcular frecuencias
+        frecuencias = Counter(texto)
+        
+        if len(frecuencias) == 0:
+            return
+        
+        # Caso especial: un solo carácter
+        if len(frecuencias) == 1:
+            char = list(frecuencias.keys())[0]
+            self.raiz = NodoHuffman(char, frecuencias[char])
+            self.codigos[char] = '0'
+            self.codigos_inversos['0'] = char
+            return
+        
+        # 2. Crear cola de prioridad con nodos hoja
+        heap = []
+        for caracter, freq in frecuencias.items():
+            nodo = NodoHuffman(caracter, freq)
+            heapq.heappush(heap, nodo)
+        
+        # 3. Construir árbol combinando nodos
+        while len(heap) > 1:
+            # Extraer los dos nodos con menor frecuencia
+            izq = heapq.heappop(heap)
+            der = heapq.heappop(heap)
+            
+            # Crear nodo padre
+            padre = NodoHuffman(None, izq.frecuencia + der.frecuencia)
+            padre.izquierdo = izq
+            padre.derecho = der
+            
+            # Reinsertar en la cola
+            heapq.heappush(heap, padre)
+        
+        # 4. El único nodo restante es la raíz
+        self.raiz = heap[0]
+        
+        # 5. Generar códigos
+        self._generar_codigos(self.raiz, "")
+    
+    def _generar_codigos(self, nodo, codigo_actual):
+        """Genera códigos binarios recorriendo el árbol."""
+        if nodo is None:
+            return
+        
+        if nodo.es_hoja():
+            self.codigos[nodo.caracter] = codigo_actual
+            self.codigos_inversos[codigo_actual] = nodo.caracter
+            return
+        
+        # 0 para izquierda, 1 para derecha
+        self._generar_codigos(nodo.izquierdo, codigo_actual + "0")
+        self._generar_codigos(nodo.derecho, codigo_actual + "1")
+    
+    def codificar(self, texto):
+        """Codifica un texto usando los códigos de Huffman."""
+        return ''.join(self.codigos[c] for c in texto)
+    
+    def decodificar(self, bits):
+        """Decodifica una cadena de bits."""
+        resultado = []
+        nodo_actual = self.raiz
+        
+        for bit in bits:
+            if bit == '0':
+                nodo_actual = nodo_actual.izquierdo
+            else:
+                nodo_actual = nodo_actual.derecho
+            
+            if nodo_actual.es_hoja():
+                resultado.append(nodo_actual.caracter)
+                nodo_actual = self.raiz
+        
+        return ''.join(resultado)
+    
+    def mostrar_codigos(self):
+        """Muestra la tabla de códigos."""
+        print("\nTabla de códigos Huffman:")
+        print("-" * 40)
+        for caracter, codigo in sorted(self.codigos.items(), 
+                                        key=lambda x: (len(x[1]), x[1])):
+            print(f"'{caracter}': {codigo:>10} ({len(codigo)} bits)")
+    
+    def calcular_compresion(self, texto):
+        """Calcula estadísticas de compresión."""
+        bits_original = len(texto) * 8  # ASCII
+        bits_huffman = len(self.codificar(texto))
+        
+        print(f"\nEstadísticas de compresión:")
+        print(f"  Texto original: {len(texto)} caracteres")
+        print(f"  Bits ASCII (8 bits/char): {bits_original}")
+        print(f"  Bits Huffman: {bits_huffman}")
+        print(f"  Compresión: {(1 - bits_huffman/bits_original)*100:.1f}%")
+        print(f"  Ratio: {bits_huffman/bits_original:.3f}")
+        
+        # Nota sobre overhead del árbol
+        overhead_estimado = len(self.codigos) * 10  # Estimación simple
+        print(f"  (Nota: En archivo real, agregar ~{overhead_estimado} bits para el árbol)")
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    texto = "ABRACADABRA"
+    print(f"Texto original: '{texto}'")
+    
+    huff = Huffman()
+    huff.construir_arbol(texto)
+    huff.mostrar_codigos()
+    
+    # Codificar
+    codificado = huff.codificar(texto)
+    print(f"\nCodificado: {codificado}")
+    
+    # Decodificar
+    decodificado = huff.decodificar(codificado)
+    print(f"Decodificado: {decodificado}")
+    
+    # Verificar
+    assert texto == decodificado, "¡Error en codificación/decodificación!"
+    print("✓ Verificación exitosa")
+    
+    # Estadísticas
+    huff.calcular_compresion(texto)</code></pre>
+        </div>
+
+        <h3>Evaluador de expresiones postfijas</h3>
+        <div class="code-container">
+            <button class="copy-button" onclick="copyCode(this)">📋 Copiar código</button>
+            <pre><code>def evaluar_postfija(expresion):
+    """
+    Evalúa una expresión en notación postfija (RPN).
+    
+    Conexión con árboles: El recorrido POSTORDEN de un árbol de expresión
+    genera exactamente esta notación, que luego puede evaluarse linealmente.
+    
+    Args:
+        expresion: string con tokens separados por espacios
+                   Ejemplo: "3 4 + 2 *" = (3 + 4) * 2 = 14
+    
+    Returns:
+        El resultado numérico de la expresión
+    """
+    pila = []
+    operadores = {
+        '+': lambda a, b: a + b,
+        '-': lambda a, b: a - b,
+        '*': lambda a, b: a * b,
+        '/': lambda a, b: a / b,
+        '^': lambda a, b: a ** b,
+        '%': lambda a, b: a % b,
+    }
+    
+    tokens = expresion.split()
+    
+    for token in tokens:
+        if token in operadores:
+            # Es un operador: extraer dos operandos
+            if len(pila) < 2:
+                raise ValueError(f"Expresión inválida: faltan operandos para '{token}'")
+            
+            b = pila.pop()  # Segundo operando (arriba de la pila)
+            a = pila.pop()  # Primer operando
+            resultado = operadores[token](a, b)
+            pila.append(resultado)
+        else:
+            # Es un operando: convertir a número y apilar
+            try:
+                numero = float(token)
+                pila.append(numero)
+            except ValueError:
+                raise ValueError(f"Token inválido: '{token}'")
+    
+    if len(pila) != 1:
+        raise ValueError("Expresión inválida: sobran operandos")
+    
+    return pila[0]
+
+# Ejemplos de uso
+if __name__ == "__main__":
+    ejemplos = [
+        ("3 4 +", "(3 + 4)"),
+        ("3 4 + 2 *", "(3 + 4) * 2"),
+        ("5 1 2 + 4 * + 3 -", "5 + (1 + 2) * 4 - 3"),
+        ("2 3 ^ 4 +", "2^3 + 4"),
+    ]
+    
+    print("Evaluación de expresiones postfijas:")
+    print("=" * 60)
+    for postfija, infija in ejemplos:
+        resultado = evaluar_postfija(postfija)
+        print(f"  Postfija: {postfija:25} | Infija: {infija:20} = {resultado}")</code></pre>
+        </div>
+    </section>
+
+    <!-- ACTIVIDADES IA -->
+    <section id="ia-activities">
+        <h2>🤖 Actividades con IA (Semana 8)</h2>
+
+        <div class="warning">
+            <h3>⚠️ Uso crítico de IA en estructuras de datos</h3>
+            <p>Las LLMs pueden cometer errores con árboles. <strong>Siempre verifica</strong> las respuestas de la IA:</p>
+            <ul>
+                <li>Usa el <a href="https://www.cs.usfca.edu/~galles/visualization/AVLtree.html" target="_blank">simulador visual de AVL</a> para confirmar rotaciones.</li>
+                <li>Ejecuta el código generado con casos de prueba propios.</li>
+                <li>Verifica manualmente los factores de balance en ejemplos pequeños.</li>
+            </ul>
+        </div>
+
+        <div class="ia-activity">
+            <h3><span class="prompt-number">1</span> Predicción y verificación de rotaciones AVL</h3>
+            <p><strong>Enfoque activo:</strong> Tú predices, la IA verifica.</p>
+            <div class="ia-prompt">Voy a proponerte una secuencia de inserciones en un AVL y MI PREDICCIÓN de qué rotación ocurrirá. Verifica si mi predicción es correcta.
+
+Secuencia: [30, 20, 25]
+
+MI PREDICCIÓN:
+- Después de insertar 30: árbol con solo la raíz 30
+- Después de insertar 20: 30 tiene hijo izquierdo 20, FB(30)=+1
+- Después de insertar 25: 
+  - 25 va a la derecha de 20
+  - FB(30) = +2 (desbalanceado)
+  - FB(20) = -1 (hijo va a la derecha)
+  - Esto es caso LR, necesita rotación doble
+
+¿Es correcta mi predicción? Si hay errores, explícame dónde me equivoqué paso a paso.</div>
+        </div>
+
+        <div class="ia-activity">
+            <h3><span class="prompt-number">2</span> Depuración de implementación de eliminación BST</h3>
+            <div class="ia-prompt">[INSTRUCCIONES: Pega tu código de BST con el método eliminar y un caso de prueba que falla]
+
+Tengo esta implementación de eliminación en BST:
+
+```python
+# [PEGAR TU CÓDIGO AQUÍ]
+```
+
+Caso de prueba:
+```python
+bst = BST()
+for v in [50, 30, 70, 20, 40, 60, 80]:
+    bst.insertar(v)
+bst.eliminar(70)  # Nodo con dos hijos
+print(bst.inorden())  # Esperado: [20, 30, 40, 50, 60, 80]
+                      # Obtenido: [resultado incorrecto o error]
+```
+
+Tareas:
+1. Identifica si el error está en el manejo de alguno de los 3 casos
+2. Muestra la ejecución paso a paso para mi caso de prueba
+3. Corrige el código con comentarios explicativos
+4. Dame 3 casos de prueba adicionales que cubran cada caso de eliminación</div>
+        </div>
+
+        <div class="ia-activity">
+            <h3><span class="prompt-number">3</span> Diseño de esquema de compresión Huffman</h3>
+            <div class="ia-prompt">Contexto: Necesito comprimir un archivo de texto con las siguientes características:
+- Idioma: español
+- Tipo: [especificar: código fuente / texto literario / datos tabulares / logs]
+- Tamaño aproximado: [especificar]
+
+Tarea:
+1. Estima las frecuencias típicas de caracteres para ese tipo de texto en español.
+2. Construye un árbol de Huffman basado en esas frecuencias estimadas.
+3. Genera la tabla de códigos resultante.
+4. Calcula la compresión teórica esperada vs ASCII.
+5. Explica cómo se guardaría el árbol en el archivo comprimido.
+
+Pregunta adicional: ¿Qué pasaría si el texto real tiene frecuencias muy diferentes a las estimadas?</div>
+        </div>
+
+        <div class="ia-activity">
+            <h3><span class="prompt-number">4</span> Comparación de estructuras para indexación</h3>
+            <div class="ia-prompt">Contexto: Estoy diseñando un sistema y debo elegir la estructura de índice adecuada.
+
+Escenario:
+- Tabla con [especificar cantidad] de registros
+- Operaciones frecuentes: [búsquedas puntuales / rangos / inserciones frecuentes]
+- Almacenamiento: [SSD / HDD / memoria RAM]
+- Tamaño de bloque de disco: 4KB
+
+Tarea:
+1. Compara BST, AVL, B-tree y B+ tree para este escenario.
+2. Calcula para cada uno:
+   - Altura esperada
+   - Accesos a disco por búsqueda
+   - Ventajas/desventajas específicas
+3. Recomienda la estructura óptima con justificación.
+
+IMPORTANTE: Muestra los cálculos para que yo pueda verificarlos.</div>
+        </div>
+
+        <div class="checklist">
+            <h3>✅ Rúbrica de uso ético de IA (auto-revisión)</h3>
+            <ul>
+                <li><input type="checkbox" aria-label="Atribución"> Documenté qué partes fueron apoyadas por IA en mi código o reporte.</li>
+                <li><input type="checkbox" aria-label="Comprensión"> Puedo explicar las rotaciones AVL dibujándolas en papel sin consultar.</li>
+                <li><input type="checkbox" aria-label="Validación"> Verifiqué las respuestas de la IA con el simulador o ejecutando código.</li>
+                <li><input type="checkbox" aria-label="Casos propios"> Diseñé casos de prueba propios, no solo usé los sugeridos por la IA.</li>
+                <li><input type="checkbox" aria-label="Reflexión"> Escribí un párrafo sobre qué errores cometió la IA (si los hubo) y cómo los detecté.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- PROYECTO -->
+    <section id="proyecto" class="project">
+        <h2>🚀 Proyecto integrador – Avance Semana 8</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 20px;">
+            <div>
+                <h3>Sistema de indexación y compresión</h3>
+                <p>Desarrolla un mini-sistema que combine las estructuras de esta semana:</p>
+                
+                <div class="design-note" style="margin: 10px 0;">
+                    <strong>🔧 Aclaración importante:</strong> Son dos funcionalidades <em>complementarias pero independientes</em> sobre el mismo texto fuente:
+                    <ul>
+                        <li><strong>Indexación:</strong> Para buscar palabras rápidamente (BST/AVL sobre el texto original)</li>
+                        <li><strong>Compresión:</strong> Para ahorrar espacio en disco (generar archivo <code>.huff</code>)</li>
+                    </ul>
+                    No se trata de indexar el texto comprimido ni de comprimir el índice.
+                </div>
+                
+                <ul>
+                    <li><strong>Módulo de índice:</strong> BST o AVL que indexe palabras del documento original con sus posiciones (línea, columna).</li>
+                    <li><strong>Módulo de compresión:</strong> Huffman para generar una versión comprimida del documento (archivo <code>.huff</code>).</li>
+                    <li><strong>Consultas:</strong> Interfaz para buscar palabras y mostrar contexto (líneas donde aparecen).</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Entregables sugeridos</h3>
+                <ul>
+                    <li>Código organizado en módulos: <code>bst.py</code>, <code>avl.py</code>, <code>huffman.py</code>, <code>main.py</code>.</li>
+                    <li>Archivo de prueba: texto de al menos 1000 palabras.</li>
+                    <li>Reporte (3-4 páginas):
+                        <ul>
+                            <li>Descripción de la arquitectura.</li>
+                            <li>Análisis de complejidad de cada operación.</li>
+                            <li>Estadísticas de compresión lograda.</li>
+                            <li>Comparación BST vs AVL (tiempos, alturas).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="checklist">
+            <h3>✅ Rúbrica de evaluación del proyecto</h3>
+            <table>
+                <tr>
+                    <th>Criterio</th>
+                    <th>Puntos</th>
+                    <th>Descripción</th>
+                </tr>
+                <tr>
+                    <td><strong>Implementación BST/AVL</strong></td>
+                    <td>25</td>
+                    <td>Operaciones correctas (insertar, buscar, <strong>eliminar</strong>). AVL mantiene balance después de cada operación.</td>
+                </tr>
+                <tr>
+                    <td><strong>Implementación Huffman</strong></td>
+                    <td>25</td>
+                    <td>Construcción correcta del árbol. Codificación y decodificación verificables.</td>
+                </tr>
+                <tr>
+                    <td><strong>Integración y funcionalidad</strong></td>
+                    <td>20</td>
+                    <td>El sistema completo funciona: indexa, comprime, permite consultas.</td>
+                </tr>
+                <tr>
+                    <td><strong>Análisis y documentación</strong></td>
+                    <td>15</td>
+                    <td>Reporte claro con análisis de complejidad, estadísticas y comparaciones.</td>
+                </tr>
+                <tr>
+                    <td><strong>Uso ético de IA</strong></td>
+                    <td>15</td>
+                    <td>Evidencia de comprensión propia. Verificación de respuestas de IA. Atribución clara.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="checklist">
+            <h3>Checklist rápido antes de entregar</h3>
+            <ul>
+                <li><input type="checkbox"> Puedo dibujar una rotación LR en papel explicando cada paso.</li>
+                <li><input type="checkbox"> Mi BST implementa correctamente los 3 casos de eliminación.</li>
+                <li><input type="checkbox"> Mi AVL pasa casos de prueba con las 4 rotaciones (LL, RR, LR, RL).</li>
+                <li><input type="checkbox"> Mi Huffman comprime y descomprime correctamente cualquier texto ASCII.</li>
+                <li><input type="checkbox"> Comparé el rendimiento de BST vs AVL con datos ordenados y aleatorios.</li>
+                <li><input type="checkbox"> Verifiqué las respuestas de IA con el simulador o casos de prueba propios.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- RETO GAMIFICADO -->
+    <section id="reto">
+        <div class="gamification">
+            <h2>🏆 Desafío del Diccionario Maldito</h2>
+            <p><strong>Escenario:</strong> El bibliotecario malvado del pueblo insertó las 10,000 palabras de su diccionario en un BST... ¡pero las insertó en orden alfabético! Ahora cada búsqueda toma una eternidad.</p>
+            
+            <p><strong>Tu misión:</strong></p>
+            <ol>
+                <li>Calcula exactamente cuántas comparaciones se necesitan para buscar la palabra "zorro" en ese BST degenerado (asume que está en la posición 9,500).</li>
+                <li>Si convirtieras ese BST en un AVL, ¿cuál sería la altura máxima y cuántas comparaciones necesitarías?</li>
+                <li>El bibliotecario ofrece un trato: te da las palabras en cualquier orden que elijas, pero solo tienes un BST básico (sin AVL). ¿Qué orden de inserción minimizaría la altura?</li>
+            </ol>
+            
+            <details>
+                <summary>💡 Ver solución</summary>
+                <div style="padding: 15px; background: #f9f9f9; border-radius: 5px; margin-top: 10px;">
+                    <p><strong>1. BST degenerado:</strong> Con inserción alfabética, el árbol es una lista. "zorro" en posición 9,500 requiere exactamente <strong>9,500 comparaciones</strong> (recorrer desde la raíz hasta ese nodo).</p>
+                    
+                    <p><strong>2. AVL:</strong> Altura máxima ≈ 1.44 × log₂(10,000) ≈ 1.44 × 13.3 ≈ <strong>19</strong>. Búsqueda: máximo <strong>19 comparaciones</strong>. ¡500 veces más rápido!</p>
+                    
+                    <p><strong>3. Orden óptimo para BST básico:</strong> Insertar en orden de "búsqueda binaria":
+                    <ul>
+                        <li>Primero la mediana (palabra #5,000)</li>
+                        <li>Luego las medianas de cada mitad (#2,500 y #7,500)</li>
+                        <li>Continuar recursivamente</li>
+                    </ul>
+                    Esto produce un árbol perfectamente balanceado con altura = ⌈log₂(10,001)⌉ = <strong>14</strong>.</p>
+                    
+                    <p><strong>Lección:</strong> El orden de inserción determina la forma del BST. Un AVL elimina esta dependencia a costa de operaciones extra en cada inserción.</p>
+                    
+                    <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+                        <strong>💡 Nota técnica para curiosos:</strong> Si intentas crear el árbol degenerado de 10,000 nodos en Python con la implementación recursiva del curso, recibirás un <code>RecursionError</code>. Esto ocurre porque Python limita la profundidad de recursión (usualmente a ~1,000 llamadas). Para simularlo, tendrías que:
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li>Aumentar el límite: <code>import sys; sys.setrecursionlimit(15000)</code></li>
+                            <li>O mejor: implementar una versión iterativa usando un bucle <code>while</code></li>
+                        </ul>
+                        <em>¡Este es un ejemplo real de cómo las limitaciones del lenguaje afectan nuestras estructuras de datos!</em>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <div class="gamification">
+            <h2>🎮 Bonus: El Código Morse Optimizado</h2>
+            <p><strong>Dato curioso:</strong> El código Morse fue diseñado (intuitivamente) siguiendo principios similares a Huffman: 'E' (la letra más frecuente en inglés) es solo un punto (.), mientras que 'Q' (poco frecuente) es "- - · -".</p>
+            
+            <p><strong>Mini-reto:</strong> Si Samuel Morse hubiera tenido una computadora en 1840, ¿habría creado exactamente el mismo código? Investiga las frecuencias del inglés y compara.</p>
+            
+            <details>
+                <summary>💡 Pista</summary>
+                <p>Las frecuencias que Morse estimó no eran exactas (contó tipos de imprenta en una imprenta local, no texto real). Además, Morse priorizó que el código fuera:</p>
+                <ul>
+                    <li>Fácil de recordar para operadores humanos</li>
+                    <li>Distinguible auditivamente (evitar confusiones entre símbolos similares)</li>
+                    <li>Práctico de transmitir manualmente con un telégrafo</li>
+                </ul>
+                <p>¡La ingeniería real siempre tiene más restricciones que la teoría pura!</p>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <p>Semana 8 – Estructuras de Datos Arbóreas Especializadas | Estructuras de Datos Avanzadas</p>
+        <p>Dr. Eligardo Cruz Sánchez | Universidad Autónoma de Nayarit</p>
+        <p><em>Versión 2.1 – Correcciones técnicas y pedagógicas adicionales</em></p>
+    </footer>
+</div>
+
+<script>
+function copyCode(button) {
+    const codeBlock = button.nextElementSibling.querySelector('code');
+    const textToCopy = codeBlock.textContent;
+    
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = button.textContent;
+        button.textContent = '✅ ¡Copiado!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }).catch(err => {
+        console.error('Error al copiar:', err);
+        button.textContent = '❌ Error';
+        setTimeout(() => {
+            button.textContent = '📋 Copiar código';
+        }, 2000);
+    });
+}
+</script>
+
+</body>
+</html>

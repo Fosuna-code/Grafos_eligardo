@@ -1,3 +1,7 @@
+#Mi nombre
+
+Nombre: Fernando Osuna Manzo.
+
 # Eligardo Alert!
 
 Documento generado a partir de un draft que me avente en 10 minutos y pasado por gemini para que se viera bonito (pongame 100 profe)
